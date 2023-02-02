@@ -49,8 +49,11 @@ func initApiHandler() error {
 		Logger:   Logger{},
 	})
 
-	// API客户端初始化
+	// 视频号小店API客户端初始化
 	channels.Sdk.NewShopApiClient(ShopAppId, ShopAppSecret)
+
+	// 视频号橱窗API客户端初始化
+	//channels.Sdk.NewWindowApiClient(WindowAppId, WindowAppSecret)
 
 	return nil
 }
