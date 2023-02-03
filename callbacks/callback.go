@@ -19,8 +19,8 @@ type callBackUrlVars struct {
 }
 
 type CallBackHandler struct {
-	token     string // 回调 token
-	encryptor *encryptor.WorkWXEncryptor
+	token     string                     // 回调 token
+	encryptor *encryptor.WorkWXEncryptor // todo 可废弃？
 	ep        *envelope.Processor
 }
 
@@ -74,14 +74,8 @@ func (cb *CallBackHandler) EchoTestHandler(rw http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	payload, err := cb.encryptor.Decrypt([]byte(args.EchoStr))
-	if err != nil {
-		rw.WriteHeader(http.StatusBadRequest)
-		return
-	}
-
 	rw.WriteHeader(http.StatusOK)
-	_, _ = rw.Write(payload.Msg)
+	_, _ = rw.Write([]byte(args.EchoStr))
 }
 
 func (cb *CallBackHandler) parseUrlVars(urlVars url.Values) (callBackUrlVars, error) {
@@ -89,7 +83,7 @@ func (cb *CallBackHandler) parseUrlVars(urlVars url.Values) (callBackUrlVars, er
 
 	var msgSignature string
 	{
-		l := urlVars["msg_signature"]
+		l := urlVars["signature"]
 		if len(l) != 1 {
 			return callBackUrlVars{}, errMalformedArgs
 		}

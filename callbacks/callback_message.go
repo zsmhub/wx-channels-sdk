@@ -22,10 +22,10 @@ type CallbackMessage struct {
 	EventType EventType `json:"Event"`
 
 	// 额外的信息
-	Extras CallBackExtraInfoInterface
+	Extras CallBackExtraInfoInterface `json:"Extras"`
 
 	// 保留原始回调数据，方便排查问题
-	OriginalMessage string
+	OriginalMessage string `json:"OriginalMessage"`
 }
 
 func (m CallbackMessage) ParseMessageFromJson(body []byte) (CallbackMessage, error) {

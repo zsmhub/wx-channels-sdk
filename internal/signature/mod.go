@@ -75,7 +75,7 @@ var _ ToMsgSignature = (*httpRequestWithSignature)(nil)
 
 // GetMsgSignature 取请求上携带的签名串
 func (u *httpRequestWithSignature) GetMsgSignature() (string, bool) {
-	l := u.url.Query()["msg_signature"]
+	l := u.url.Query()["signature"]
 	if len(l) != 1 {
 		return "", false
 	}
@@ -87,10 +87,9 @@ func (u *httpRequestWithSignature) GetMsgSignature() (string, bool) {
 func (u *httpRequestWithSignature) GetParamValues() ([]string, bool) {
 	result := make([]string, 0)
 	for k, l := range u.url.Query() {
-		if k == "msg_signature" {
-			continue
+		if k == "timestamp" || k == "nonce" {
+			result = append(result, l...)
 		}
-		result = append(result, l...)
 	}
 	if len(u.body) > 0 {
 		result = append(result, u.body)
