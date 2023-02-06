@@ -22,6 +22,10 @@ func CallbackMain() {
 		return nil
 	})
 	e.POST("/callback/shop", func(c echo.Context) error {
+		// 打印微信回调事件请求体，便于调试
+		//requestBody, _ := ioutil.ReadAll(c.Request().Body)
+		//fmt.Printf("channels post : uri=%s, req=%s\n", c.Request().RequestURI, string(requestBody))
+
 		_ = CallbackRepo.HandleShopPostReqShouest(c)
 		return c.String(200, "success")
 	})
@@ -32,6 +36,10 @@ func CallbackMain() {
 		return nil
 	})
 	e.POST("/callback/window", func(c echo.Context) error {
+		// 打印微信回调事件请求体，便于调试
+		//requestBody, _ := ioutil.ReadAll(c.Request().Body)
+		//fmt.Printf("channels post : uri=%s, req=%s\n", c.Request().RequestURI, string(requestBody))
+
 		_ = CallbackRepo.HandleWindowPostRequest(c)
 		return c.String(200, "success")
 	})
