@@ -11,38 +11,39 @@ import (
 	"io"
 )
 
-type WorkWXPayload struct {
+// 微信回调事件的请求body
+type WXPayload struct {
 	Msg       []byte
 	ReceiveID []byte
 }
 
-type WorkWXEncryptor struct {
+type WXEncryptor struct {
 	aesKey        []byte
 	entropySource io.Reader
 }
 
-type WorkWXEncryptorOption interface {
-	applyTo(x *WorkWXEncryptor)
+type WXEncryptorOption interface {
+	applyTo(x *WXEncryptor)
 }
 
 type customEntropySource struct {
 	inner io.Reader
 }
 
-func WithEntropySource(e io.Reader) WorkWXEncryptorOption {
+func WithEntropySource(e io.Reader) WXEncryptorOption {
 	return &customEntropySource{inner: e}
 }
 
-func (o *customEntropySource) applyTo(x *WorkWXEncryptor) {
+func (o *customEntropySource) applyTo(x *WXEncryptor) {
 	x.entropySource = o.inner
 }
 
 var errMalformedEncodingAESKey = errors.New("malformed EncodingAESKey")
 
-func NewWorkWXEncryptor(
+func NewWXEncryptor(
 	encodingAESKey string,
-	opts ...WorkWXEncryptorOption,
-) (*WorkWXEncryptor, error) {
+	opts ...WXEncryptorOption,
+) (*WXEncryptor, error) {
 	aesKey, err := base64.StdEncoding.DecodeString(encodingAESKey + "=")
 	if err != nil {
 		return nil, err
@@ -52,7 +53,7 @@ func NewWorkWXEncryptor(
 		return nil, errMalformedEncodingAESKey
 	}
 
-	obj := WorkWXEncryptor{
+	obj := WXEncryptor{
 		aesKey:        aesKey,
 		entropySource: rand.Reader,
 	}
@@ -63,20 +64,20 @@ func NewWorkWXEncryptor(
 	return &obj, nil
 }
 
-func (e *WorkWXEncryptor) Decrypt(base64Msg []byte) (WorkWXPayload, error) {
+func (e *WXEncryptor) Decrypt(base64Msg []byte) (WXPayload, error) {
 	// base64 decode
 	bufLen := base64.StdEncoding.DecodedLen(len(base64Msg))
 	buf := make([]byte, bufLen)
 	n, err := base64.StdEncoding.Decode(buf, base64Msg)
 	if err != nil {
-		return WorkWXPayload{}, err
+		return WXPayload{}, err
 	}
 	buf = buf[:n]
 
 	// init cipher
 	block, err := aes.NewCipher(e.aesKey)
 	if err != nil {
-		return WorkWXPayload{}, err
+		return WXPayload{}, err
 	}
 
 	iv := e.aesKey[:16]
@@ -92,13 +93,13 @@ func (e *WorkWXEncryptor) Decrypt(base64Msg []byte) (WorkWXPayload, error) {
 	msg := buf[20 : 20+msgLen]
 	receiveID := buf[20+msgLen:]
 
-	return WorkWXPayload{
+	return WXPayload{
 		Msg:       msg,
 		ReceiveID: receiveID,
 	}, nil
 }
 
-func (e *WorkWXEncryptor) prepareBufForEncryption(payload *WorkWXPayload) ([]byte, error) {
+func (e *WXEncryptor) prepareBufForEncryption(payload *WXPayload) ([]byte, error) {
 	resultMsgLen := 16 + 4 + len(payload.Msg) + len(payload.ReceiveID)
 
 	// allocate buffer
@@ -118,7 +119,7 @@ func (e *WorkWXEncryptor) prepareBufForEncryption(payload *WorkWXPayload) ([]byt
 	return pkcs7.Pad(buf), nil
 }
 
-func (e *WorkWXEncryptor) Encrypt(payload *WorkWXPayload) (string, error) {
+func (e *WXEncryptor) Encrypt(payload *WXPayload) (string, error) {
 	buf, err := e.prepareBufForEncryption(payload)
 	if err != nil {
 		return "", err

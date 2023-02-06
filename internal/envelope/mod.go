@@ -2,19 +2,18 @@ package envelope
 
 import (
 	"crypto/rand"
+	"encoding/json"
 	"encoding/xml"
 	"errors"
 	"github.com/zsmhub/wx-channels-sdk/internal/encryptor"
 	"github.com/zsmhub/wx-channels-sdk/internal/signature"
 	"io"
-	"math/big"
 	"net/url"
-	"strconv"
 )
 
 type Processor struct {
 	token         string
-	encryptor     *encryptor.WorkWXEncryptor
+	encryptor     *encryptor.WXEncryptor
 	entropySource io.Reader
 	timeSource    TimeSource
 }
@@ -30,7 +29,7 @@ func NewProcessor(token string, encodingAESKey string, opts ...ProcessorOption) 
 		o.applyTo(&obj)
 	}
 
-	enc, err := encryptor.NewWorkWXEncryptor(
+	enc, err := encryptor.NewWXEncryptor(
 		encodingAESKey,
 		encryptor.WithEntropySource(obj.entropySource),
 	)
@@ -44,84 +43,61 @@ func NewProcessor(token string, encodingAESKey string, opts ...ProcessorOption) 
 
 var errInvalidSignature = errors.New("invalid signature")
 
+// 处理回调事件的消息：支持明文模式/安全模式，也支持xml/json
 func (p *Processor) HandleIncomingMsg(url *url.URL, body []byte) (Envelope, error) {
-	// xml unmarshal
-	var x xmlRxEnvelope
-	err := xml.Unmarshal(body, &x)
-	if err != nil {
-		return Envelope{}, err
+	bodyStr := string(body)
+	if len(bodyStr) == 0 {
+		return Envelope{}, nil
 	}
 
 	// check signature
-	if !signature.VerifyHTTPRequestSignature(p.token, url, x.Encrypt) {
+	if !signature.VerifyHTTPRequestSignature(p.token, url) {
 		return Envelope{}, errInvalidSignature
 	}
 
-	// decrypt message
-	msg, err := p.encryptor.Decrypt([]byte(x.Encrypt))
+	x, err := p.ParseMessage(bodyStr)
 	if err != nil {
 		return Envelope{}, err
+	}
+
+	// 区分消息加密方式：明文模式/安全模式
+	var msg encryptor.WXPayload
+	if p.IsSafeMode(url) && x.Encrypt != "" {
+		msg, err = p.encryptor.Decrypt([]byte(x.Encrypt))
+		if err != nil {
+			return Envelope{}, err
+		}
+	} else {
+		msg.Msg = body
 	}
 
 	// assemble envelope to return
 	return Envelope{
 		ToUserName: x.ToUserName,
-		AgentID:    x.AgentID,
 		Msg:        msg.Msg,
 		ReceiveID:  msg.ReceiveID,
 	}, nil
 }
 
-func (p *Processor) MakeOutgoingEnvelope(msg []byte) ([]byte, error) {
-	workwxPayload := encryptor.WorkWXPayload{
-		Msg:       msg,
-		ReceiveID: nil,
-	}
-	encryptedMsg, err := p.encryptor.Encrypt(&workwxPayload)
-	if err != nil {
-		return nil, err
-	}
-
-	ts := p.timeSource.GetCurrentTimestamp().Unix()
-	nonce, err := makeNonce(p.entropySource)
-	if err != nil {
-		return nil, err
-	}
-
-	msgSignature := signature.MakeDevMsgSignature(
-		p.token,
-		strconv.FormatInt(ts, 10),
-		nonce,
-		encryptedMsg,
-	)
-
-	envelope := xmlTxEnvelope{
-		XMLName: xml.Name{},
-		Encrypt: cdataNode{
-			CData: encryptedMsg,
-		},
-		MsgSignature: cdataNode{
-			CData: msgSignature,
-		},
-		Timestamp: ts,
-		Nonce: cdataNode{
-			CData: nonce,
-		},
-	}
-
-	result, err := xml.Marshal(envelope)
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
+// 判断消息加密方式是不是安全模式
+func (p *Processor) IsSafeMode(url *url.URL) bool {
+	query := url.Query()
+	return query.Get("signature") != "" && "aes" == query.Get("encrypt_type")
 }
 
-func makeNonce(entropySource io.Reader) (string, error) {
-	limit := big.NewInt(1)
-	limit = limit.Lsh(limit, 64)
-	n, err := rand.Int(entropySource, limit)
-	if err != nil {
-		return "", err
+// 解析安全模式的回调事件结构体
+func (p *Processor) ParseMessage(content string) (RxEnvelope, error) {
+	// 区分数据格式：xml/json
+	var x RxEnvelope
+	if content[0:1] == "<" {
+		if err := xml.Unmarshal([]byte(content), &x); err != nil {
+			return x, err
+		}
+	} else {
+		if err := json.Unmarshal([]byte(content), &x); err != nil {
+			return x, err
+		}
 	}
-	return n.String(), nil
+	return x, nil
+
 }

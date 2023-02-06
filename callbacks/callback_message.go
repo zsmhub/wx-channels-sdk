@@ -24,7 +24,7 @@ type CallbackMessage struct {
 	// 额外的信息
 	Extras CallBackExtraInfoInterface `json:"Extras"`
 
-	// 保留原始回调数据，方便排查问题
+	// 原始回调内容，方便排查问题
 	OriginalMessage string `json:"OriginalMessage"`
 }
 

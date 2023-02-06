@@ -1,30 +1,13 @@
 package envelope
 
-import (
-	"encoding/xml"
-)
-
-type xmlRxEnvelope struct {
-	ToUserName string `xml:"ToUserName"`
-	AgentID    string `xml:"AppAgentId"`
-	Encrypt    string `xml:"Encrypt"`
-}
-
-type cdataNode struct {
-	CData string `xml:",cdata"`
-}
-
-type xmlTxEnvelope struct {
-	XMLName      xml.Name  `xml:"xml"`
-	Encrypt      cdataNode `xml:"Encrypt"`
-	MsgSignature cdataNode `xml:"MsgSignature"`
-	Timestamp    int64     `xml:"Timestamp"`
-	Nonce        cdataNode `xml:"Nonce"`
+// 安全模式的回调事件结构体
+type RxEnvelope struct {
+	ToUserName string `xml:"ToUserName" json:"ToUserName"`
+	Encrypt    string `xml:"Encrypt" json:"Encrypt"`
 }
 
 type Envelope struct {
 	ToUserName string
-	AgentID    string
 	Msg        []byte
 	ReceiveID  []byte
 }

@@ -2,7 +2,7 @@ package demo
 
 import (
 	"fmt"
-	"github.com/zsmhub/wx-channels-sdk"
+	channels "github.com/zsmhub/wx-channels-sdk"
 	"github.com/zsmhub/wx-channels-sdk/apis"
 )
 

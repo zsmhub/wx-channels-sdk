@@ -3,7 +3,7 @@ package demo
 import (
 	"fmt"
 	"github.com/labstack/echo/v4"
-	"github.com/zsmhub/wx-channels-sdk"
+	channels "github.com/zsmhub/wx-channels-sdk"
 	"github.com/zsmhub/wx-channels-sdk/callbacks"
 )
 
@@ -52,9 +52,9 @@ func (callbackRepo) InitCallbackHandler() error {
 	}
 
 	// 视频号橱窗回调事件解析
-	if err := channels.Sdk.NewWindowCallbackHandler(WindowCallbackToken, WindowCallbackEncodingAESKey); err != nil {
-		return err
-	}
+	//if err := channels.Sdk.NewWindowCallbackHandler(WindowCallbackToken, WindowCallbackEncodingAESKey); err != nil {
+	//	return err
+	//}
 
 	return nil
 }
@@ -83,7 +83,7 @@ func (callbackRepo) HandleShopPostReqShouest(c echo.Context) error {
 					return
 				}
 				fmt.Printf("接收到商品审核事件的原始内容：%s\n", msg.OriginalMessage)
-				fmt.Printf("商品审核事件的回调参数：%+v\n", extras)
+				fmt.Printf("解析商品审核事件的结构体：%+v\n", extras)
 			}
 
 		}

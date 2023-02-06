@@ -18,7 +18,7 @@ type EventProductSpuListing struct {
 	MsgType         string `json:"MsgType"`
 	Event           string `json:"Event"`
 	ProductSpuAudit struct {
-		ProductID string `json:"product_id"`
+		ProductID int    `json:"product_id"`
 		Status    int    `json:"status"`
 		Reason    string `json:"reason"`
 	} `json:"ProductSpuAudit"`

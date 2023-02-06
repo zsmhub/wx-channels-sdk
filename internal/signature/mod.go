@@ -25,20 +25,17 @@ func MakeDevMsgSignature(paramValues ...string) string {
 	return fmt.Sprintf("%x", result)
 }
 
-// ToMsgSignature 适配企业微信请求参数签名的 interface
-type ToMsgSignature interface {
-	// GetMsgSignature 取请求上携带的签名串
-	GetMsgSignature() (string, bool)
-	// GetParamValues 取所有请求参数值（不必有序）
+// ToSignature 适配企业微信请求参数签名的 interface
+type ToSignature interface {
+	// GetSignature 取请求上携带的签名串
+	GetSignature() (string, bool)
+	// GetParamValues 取所需请求参数值（不必有序）
 	GetParamValues() ([]string, bool)
 }
 
-// VerifySignature 校验一个 ToMsgSignature 的签名是否完好
-//
-// NOTE: Go 没有 default method for interface，因此无法以 `foo.VerifySignature()`
-// 的形式实现。
-func VerifySignature(token string, x ToMsgSignature) bool {
-	msgSignature, ok := x.GetMsgSignature()
+// VerifySignature 校验签名是否完好
+func VerifySignature(token string, x ToSignature) bool {
+	signature, ok := x.GetSignature()
 	if !ok {
 		return false
 	}
@@ -49,32 +46,29 @@ func VerifySignature(token string, x ToMsgSignature) bool {
 	}
 
 	devMsgSignature := MakeDevMsgSignature(append(paramValues, token)...)
-	eq := subtle.ConstantTimeCompare([]byte(msgSignature), []byte(devMsgSignature))
+	eq := subtle.ConstantTimeCompare([]byte(signature), []byte(devMsgSignature))
 	return eq != 0
 }
 
 // VerifyHTTPRequestSignature 校验一个 HTTP 请求的签名是否完好
 //
 // 这是 VerifySignature 的简单包装。
-func VerifyHTTPRequestSignature(token string, url *url.URL, body string) bool {
-	// XXX seems this is a memcpy...
+func VerifyHTTPRequestSignature(token string, url *url.URL) bool {
 	wrapped := httpRequestWithSignature{
-		url:  url,
-		body: body,
+		url: url,
 	}
 	return VerifySignature(token, &wrapped)
 }
 
 // httpRequestWithSignature 为 HTTP 请求适配签名校验逻辑
 type httpRequestWithSignature struct {
-	url  *url.URL
-	body string
+	url *url.URL
 }
 
-var _ ToMsgSignature = (*httpRequestWithSignature)(nil)
+var _ ToSignature = (*httpRequestWithSignature)(nil)
 
-// GetMsgSignature 取请求上携带的签名串
-func (u *httpRequestWithSignature) GetMsgSignature() (string, bool) {
+// GetSignature 取请求上携带的签名串
+func (u *httpRequestWithSignature) GetSignature() (string, bool) {
 	l := u.url.Query()["signature"]
 	if len(l) != 1 {
 		return "", false
@@ -83,16 +77,13 @@ func (u *httpRequestWithSignature) GetMsgSignature() (string, bool) {
 	return l[0], true
 }
 
-// GetParamValues 取所有请求参数值（不必有序）
+// GetParamValues 取所需请求参数值（不必有序）
 func (u *httpRequestWithSignature) GetParamValues() ([]string, bool) {
 	result := make([]string, 0)
 	for k, l := range u.url.Query() {
 		if k == "timestamp" || k == "nonce" {
 			result = append(result, l...)
 		}
-	}
-	if len(u.body) > 0 {
-		result = append(result, u.body)
 	}
 	return result, true
 }
