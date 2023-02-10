@@ -62,7 +62,7 @@ func main() {
 	if apiPrefixVar != nil {
 		filePrefix = *apiPrefixVar
 	}
-	filePrefix = "订单" // todo test
+	filePrefix = "售后" // todo test
 
 	doc := tool.GetDoc(docURL)
 
@@ -159,7 +159,8 @@ func generateApiCode(api Api) (result []byte, err error) {
 
 func generateApiErrCode(doc *goquery.Document) []ApiErrCode {
 	var codeSlice []ApiErrCode
-	doc.Find("#返回码~.table-wrp").Each(func(i int, selection *goquery.Selection) {
+	//doc.Find("#返回码~.table-wrp").Each(func(i int, selection *goquery.Selection) {
+	doc.Find("#错误码~.table-wrp").Each(func(i int, selection *goquery.Selection) {
 		selection.Find("tr").Each(func(i int, selection *goquery.Selection) {
 			if i == 0 { // 表头
 				return
@@ -187,6 +188,7 @@ func generateApiErrCode(doc *goquery.Document) []ApiErrCode {
 
 func addApiErrorCodeToFile(codes []ApiErrCode) {
 	if len(codes) == 0 {
+		fmt.Printf("注意：没发现错误码，可能是文档格式不统一\n")
 		return
 	}
 	filename := "./apis/api_error.go"

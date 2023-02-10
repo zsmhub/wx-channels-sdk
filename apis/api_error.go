@@ -330,3 +330,30 @@ const ErrCode606001 ErrCode = 606001
 
 // user_address字段未经过检查，请检查是否有必填字段未填写
 const ErrCode606002 ErrCode = 606002
+
+// 售后单号不存在
+const ErrCode10020000 ErrCode = 10020000
+
+// 售后单状态不合法
+const ErrCode10020001 ErrCode = 10020001
+
+// 当前售后单不支持此操作，请检查售后单状态
+const ErrCode10021041 ErrCode = 10021041
+
+// 售后单非当前账号，请检查参数
+const ErrCode10021043 ErrCode = 10021043
+
+// 售后单不存在
+const ErrCode10021050 ErrCode = 10021050
+
+// 非法的时间区间，不得大于24小时
+const ErrCode10020004 ErrCode = 10020004
+
+// 当前用户太多，请稍后再试
+const ErrCode10021044 ErrCode = 10021044
+
+// 退款失败
+const ErrCode10021045 ErrCode = 10021045
+
+// 金额不足
+const ErrCode10021046 ErrCode = 10021046
