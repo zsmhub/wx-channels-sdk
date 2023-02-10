@@ -96,3 +96,186 @@ const ErrCode10020081 ErrCode = 10020081
 
 // 该品牌申请正在审核中，请不要重复提交
 const ErrCode10020085 ErrCode = 10020085
+
+// 当前商品不允许编辑
+const ErrCode10020008 ErrCode = 10020008
+
+// 商品的类目长度不对（预期是有三级类目）
+const ErrCode10020011 ErrCode = 10020011
+
+// 销售属性不合法，不属于商品所属的三级类目
+const ErrCode10020012 ErrCode = 10020012
+
+// 商品 sku 数量不合理
+const ErrCode10020013 ErrCode = 10020013
+
+// 批量添加 sku 失败
+const ErrCode10020016 ErrCode = 10020016
+
+// 类目非法
+const ErrCode10020017 ErrCode = 10020017
+
+// 商家不具备当前类目资质
+const ErrCode10020018 ErrCode = 10020018
+
+// 运费模版非法
+const ErrCode10020019 ErrCode = 10020019
+
+// 商品标题为空
+const ErrCode10020020 ErrCode = 10020020
+
+// 商品标题过长
+const ErrCode10020021 ErrCode = 10020021
+
+// 商品头图为空
+const ErrCode10020022 ErrCode = 10020022
+
+// 商品头图过多
+const ErrCode10020023 ErrCode = 10020023
+
+// 商品描述过长
+const ErrCode10020024 ErrCode = 10020024
+
+// 商品详情图片过多
+const ErrCode10020025 ErrCode = 10020025
+
+// 商品详情描述过长
+const ErrCode10020026 ErrCode = 10020026
+
+// 资质图片过多
+const ErrCode10020027 ErrCode = 10020027
+
+// sku价格过高
+const ErrCode10020028 ErrCode = 10020028
+
+// sku商品编码过长
+const ErrCode10020029 ErrCode = 10020029
+
+// sku_out_id已存在
+const ErrCode10020030 ErrCode = 10020030
+
+// sku销售属性相同 key 下不能超过100个不同value
+const ErrCode10020031 ErrCode = 10020031
+
+// sku销售属性 key 过长
+const ErrCode10020032 ErrCode = 10020032
+
+// sku销售属性 value 过长
+const ErrCode10020033 ErrCode = 10020033
+
+// 图片/视频 url 非法， url 前缀应为mmecimage.cn/p/
+const ErrCode10020035 ErrCode = 10020035
+
+// out_product_id过长
+const ErrCode10020036 ErrCode = 10020036
+
+// out_sku_id过长
+const ErrCode10020037 ErrCode = 10020037
+
+// 上架的商品缺少sku
+const ErrCode10020038 ErrCode = 10020038
+
+// SKU价格为0
+const ErrCode10020039 ErrCode = 10020039
+
+// sku售卖价格大于市场价格
+const ErrCode10020040 ErrCode = 10020040
+
+// 账号注销中
+const ErrCode10020041 ErrCode = 10020041
+
+// 商品标题过短
+const ErrCode10020042 ErrCode = 10020042
+
+// 类目不可用，请更换类目
+const ErrCode10020043 ErrCode = 10020043
+
+// 商品标题不得仅为数字、字母、字符，不得含非法字符，请修改后重新提交
+const ErrCode10020045 ErrCode = 10020045
+
+// 商品信息设置有误，请重新输入
+const ErrCode10020046 ErrCode = 10020046
+
+// 由于类目保证金不足，已禁止新增商品
+const ErrCode10020048 ErrCode = 10020048
+
+// 参数错误
+const ErrCode10020051 ErrCode = 10020051
+
+// 提审频率达到限制
+const ErrCode10020066 ErrCode = 10020066
+
+// 当前运费模版计价方式为[按重量]，且提交商品重量为0
+const ErrCode10020068 ErrCode = 10020068
+
+// 当前类目不允许选择无需快递的发货方式
+const ErrCode10020069 ErrCode = 10020069
+
+// 由于类目保证金不足，已下架所有商品
+const ErrCode10020070 ErrCode = 10020070
+
+// 该商品所需类目保证金高于当前保证金余额，请前往商家网页端（https://channels.weixin.qq.com/shop）添加一次该类目商品，即可完成保证金补缴。
+const ErrCode10020083 ErrCode = 10020083
+
+// 当前类目不支持当前品牌，或商品品牌 id 非法，或商品品牌 id 未申请通过
+const ErrCode10020088 ErrCode = 10020088
+
+// 售后说明超过长度限制（200 UTF字符）
+const ErrCode10020095 ErrCode = 10020095
+
+// 商品参数重复
+const ErrCode10020096 ErrCode = 10020096
+
+// 商品参数缺少必填项
+const ErrCode10020097 ErrCode = 10020097
+
+// 商品参数内容有误
+const ErrCode10020098 ErrCode = 10020098
+
+// 商品正在审核中，无法编辑或删除，请先调用撤回商品审核接口
+const ErrCode10020049 ErrCode = 10020049
+
+// 该 spu 处于抢购状态，不能修改sku
+const ErrCode10020014 ErrCode = 10020014
+
+// 该商品的sku_id/sku_out_id填写有误
+const ErrCode10020034 ErrCode = 10020034
+
+// 该商品上一次提交正在上传中，请稍后再试
+const ErrCode10020067 ErrCode = 10020067
+
+// 未开张商店发布商品
+const ErrCode10020089 ErrCode = 10020089
+
+// 暂不支持上架该类型的商品
+const ErrCode10020091 ErrCode = 10020091
+
+// 商品edit_status != 2
+const ErrCode10020044 ErrCode = 10020044
+
+// 当前商品状态不允许直接更新库存，或product_id和sku_id不匹配，或库存不足以减扣，或增加减少数量为0
+const ErrCode10020054 ErrCode = 10020054
+
+// 抢购商品未上架
+const ErrCode10020071 ErrCode = 10020071
+
+// 抢购开始/结束时间无效，请设置一年内的时间
+const ErrCode10020072 ErrCode = 10020072
+
+// 抢购库存超出商品可用库存
+const ErrCode10020073 ErrCode = 10020073
+
+// 设置抢购的 SKU 无效
+const ErrCode10020074 ErrCode = 10020074
+
+// 商品已存在其他抢购活动
+const ErrCode10020075 ErrCode = 10020075
+
+// 抢购价格超出原价
+const ErrCode10020078 ErrCode = 10020078
+
+// 接口暂时下线
+const ErrCode10020090 ErrCode = 10020090
+
+// 抢购活动不存在
+const ErrCode10020076 ErrCode = 10020076
