@@ -357,3 +357,18 @@ const ErrCode10021045 ErrCode = 10021045
 
 // 金额不足
 const ErrCode10021046 ErrCode = 10021046
+
+// 纠纷单号不存在
+const ErrCode10021500 ErrCode = 10021500
+
+// 单条留言文字数量过多
+const ErrCode10021501 ErrCode = 10021501
+
+// 所有留言图片总数过多
+const ErrCode10021502 ErrCode = 10021502
+
+// 不是待客服处理的状态，无法留言
+const ErrCode10021503 ErrCode = 10021503
+
+// 不是待商家举证的状态，无法留言
+const ErrCode10021504 ErrCode = 10021504

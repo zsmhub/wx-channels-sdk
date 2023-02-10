@@ -62,7 +62,7 @@ func main() {
 	if apiPrefixVar != nil {
 		filePrefix = *apiPrefixVar
 	}
-	filePrefix = "售后" // todo test
+	filePrefix = "纠纷" // todo test
 
 	doc := tool.GetDoc(docURL)
 
@@ -159,8 +159,13 @@ func generateApiCode(api Api) (result []byte, err error) {
 
 func generateApiErrCode(doc *goquery.Document) []ApiErrCode {
 	var codeSlice []ApiErrCode
-	//doc.Find("#返回码~.table-wrp").Each(func(i int, selection *goquery.Selection) {
-	doc.Find("#错误码~.table-wrp").Each(func(i int, selection *goquery.Selection) {
+	var docErrCode *goquery.Selection
+	if doc.Find("#错误码~.table-wrp").Length() > 0 {
+		docErrCode = doc.Find("#错误码~.table-wrp")
+	} else {
+		docErrCode = doc.Find("#返回码~.table-wrp")
+	}
+	docErrCode.Each(func(i int, selection *goquery.Selection) {
 		selection.Find("tr").Each(func(i int, selection *goquery.Selection) {
 			if i == 0 { // 表头
 				return
