@@ -60,3 +60,21 @@ const ErrCode10020065 ErrCode = 10020065
 
 // 参数有误
 const ErrCode9401020 ErrCode = 9401020
+
+// 资质材料超限，最多不能超过10张
+const ErrCode10020062 ErrCode = 10020062
+
+// 不合法的类目ID
+const ErrCode10020063 ErrCode = 10020063
+
+// 该类目审核中，无需重复提交
+const ErrCode10020064 ErrCode = 10020064
+
+// 不合法的fileid
+const ErrCode10020087 ErrCode = 10020087
+
+// 必须使用上传资质接口获取fileid
+const ErrCode10020094 ErrCode = 10020094
+
+// 不合法的审核ID
+const ErrCode10020006 ErrCode = 10020006

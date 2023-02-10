@@ -84,8 +84,8 @@ func main() {
 		tool.Die("获取不到接口请求地址")
 	}
 	apiURLSlice := strings.Split(apiURL, " ")
-	if len(apiURLSlice) != 2 {
-		tool.Die("接口调用请求说明：文档有误")
+	if len(apiURLSlice) < 2 {
+		tool.Die("接口调用请求说明：文档有误，apiUrlSlice=%+v", apiURLSlice)
 	}
 	api.Method = strcase.ToCamel(strings.ToLower(apiURLSlice[0]))
 	api.ApiURL = apiURLSlice[1]
