@@ -29,7 +29,7 @@ func ApiMain() {
 	}
 
 	// 获取商品列表
-	resp3, err3 := channels.Sdk.ShopClient.ExecEcProductListGet(apis.ReqEcProductListGet{
+	resp3, err3 := channels.Sdk.ShopClient.ExecProductListGet(apis.ReqProductListGet{
 		Status:   0,
 		PageSize: 10,
 		NextKey:  "",

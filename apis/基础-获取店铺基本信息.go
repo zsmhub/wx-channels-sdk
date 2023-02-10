@@ -28,12 +28,9 @@ func (x ReqEcBasicsInfoGet) intoURLValues() url.Values {
 type RespEcBasicsInfoGet struct {
 	CommonResp
 	Info struct {
-		// 店铺名称
-		Nickname string `json:"nickname"`
-		// 店铺头像URL
-		HeadimgURL string `json:"headimg_url"`
-		// 店铺类型，目前为"企业"或"个体工商户"
-		SubjectType string `json:"subject_type"`
+		Nickname    string `json:"nickname"`     // 店铺名称
+		HeadimgURL  string `json:"headimg_url"`  // 店铺头像URL
+		SubjectType string `json:"subject_type"` // 店铺类型，目前为"企业"或"个体工商户"
 	} `json:"info"`
 }
 

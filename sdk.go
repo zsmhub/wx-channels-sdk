@@ -40,7 +40,7 @@ func (s *sdk) NewShopCallbackHandler(token, encodingAESKey string) error {
 
 // 视频号小店：API客户端初始化
 func (s *sdk) NewShopApiClient(appId, appSecret string) {
-	s.ShopClient = apis.NewApiClient(appId, appSecret, s.Options)
+	s.ShopClient = apis.NewShopApiClient(appId, appSecret, s.Options)
 }
 
 // 视频号橱窗：回调事件初始化 (如果要处理微信回调, 这一步是必须的)
@@ -57,5 +57,5 @@ func (s *sdk) NewWindowCallbackHandler(token, encodingAESKey string) error {
 
 // 视频号橱窗：API客户端初始化
 func (s *sdk) NewWindowApiClient(appId, appSecret string) {
-	s.WindowClient = apis.NewApiClient(appId, appSecret, s.Options)
+	s.WindowClient = apis.NewWindowApiClient(appId, appSecret, s.Options)
 }

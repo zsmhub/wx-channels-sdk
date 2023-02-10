@@ -39,3 +39,9 @@ const EventTypeProductSpuListing EventType = "product_spu_listing"
 
 // 商品审核
 const EventTypeProductSpuAudit EventType = "product_spu_audit"
+
+// 商品编辑
+const EventTypeProductSpuUpdate EventType = "product_spu_update"
+
+// 优惠券领取通知
+const EventTypeChannelsEcCouponReceive EventType = "channels_ec_coupon_receive"

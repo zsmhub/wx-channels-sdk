@@ -10,12 +10,9 @@ import (
 // 文档：https://developers.weixin.qq.com/doc/channels/API/basics/getaccesstoken.html
 
 type ReqGetAccessToken struct {
-	// 固定填 client_credential，必填
-	GrantType string `json:"grant_type"`
-	// 小店唯一凭证，即 小店ID，必填
-	Appid string `json:"appid"`
-	// 小店唯一凭证密钥，必填
-	Secret string `json:"secret"`
+	GrantType string `json:"grant_type"` // 固定填 client_credential，必填
+	Appid     string `json:"appid"`      // 小店唯一凭证，即 小店ID，必填
+	Secret    string `json:"secret"`     // 小店唯一凭证密钥，必填
 }
 
 var _ urlValuer = ReqGetAccessToken{}
@@ -34,10 +31,8 @@ func (x ReqGetAccessToken) intoURLValues() url.Values {
 
 type RespGetAccessToken struct {
 	CommonResp
-	// 获取到的凭证
-	AccessToken string `json:"access_token"`
-	// 凭证有效时间，单位：秒。
-	ExpiresIn int `json:"expires_in"`
+	AccessToken string `json:"access_token"` // 获取到的凭证
+	ExpiresIn   int    `json:"expires_in"`   // 凭证有效时间，单位：秒。
 }
 
 var _ bodyer = RespGetAccessToken{}

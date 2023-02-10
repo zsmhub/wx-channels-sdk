@@ -1,0 +1,60 @@
+package apis
+
+import (
+	"encoding/json"
+	{{if .IsGet }}"net/url"{{end}}
+)
+
+// {{ .Name }}
+// 文档：{{ .DocURL }}
+
+{{ .ReqCode }}
+
+{{if .IsGet }}
+var _ urlValuer = Req{{ .StructName }}{}
+
+func (x Req{{ .StructName }}) intoURLValues() url.Values {
+	var vals map[string]interface{}
+	jsonBytes, _ := json.Marshal(x)
+	_ = json.Unmarshal(jsonBytes, &vals)
+
+	var ret url.Values = make(map[string][]string)
+	for k, v := range vals {
+		ret.Add(k, StrVal(v))
+	}
+	return ret
+}
+{{else}}
+var _ bodyer = Req{{ .StructName }}{}
+
+func (x Req{{ .StructName }}) intoBody() ([]byte, error) {
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+{{end}}
+
+{{ .RespCode }}
+var _ bodyer = Resp{{ .StructName }}{}
+
+func (x Resp{{ .StructName }}) intoBody() ([]byte, error) {
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (c *ApiClient) Exec{{ .StructName }}(req Req{{ .StructName }}) (Resp{{ .StructName }}, error) {
+	var resp Resp{{ .StructName }}
+	err := c.executeWXApi{{ .Method }}("{{ .ApiURL }}", req, &resp, true)
+	if err != nil {
+		return Resp{{ .StructName }}{}, err
+	}
+	if bizErr := resp.TryIntoErr(); bizErr != nil {
+		return Resp{{ .StructName }}{}, bizErr
+	}
+	return resp, nil
+}

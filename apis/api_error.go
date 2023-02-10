@@ -26,7 +26,7 @@ func (e *ClientError) Error() string {
 type ErrCode int64
 
 // 系统繁忙，请开发者稍候再试
-const ErrCodeServiceUnavailable ErrCode = -1
+const ErrCodeSysErr ErrCode = -1
 
 // 请求成功
 const ErrCodeSuccess ErrCode = 0
@@ -42,3 +42,21 @@ const ErrCode40013 ErrCode = 40013
 
 // 需要使用 HTTP GET
 const ErrCode43001 ErrCode = 43001
+
+// 无效的地址编码
+const ErrCode10021402 ErrCode = 10021402
+
+// 参数有误
+const ErrCode10020055 ErrCode = 10020055
+
+// 无权限调用该api
+const ErrCode10020050 ErrCode = 10020050
+
+// 商品不存在
+const ErrCode10020052 ErrCode = 10020052
+
+// 商品未上架
+const ErrCode10020065 ErrCode = 10020065
+
+// 参数有误
+const ErrCode9401020 ErrCode = 9401020

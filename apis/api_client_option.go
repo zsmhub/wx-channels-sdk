@@ -8,7 +8,7 @@ import (
 )
 
 // 微信视频号API默认域名
-const DefaultQYAPIHost = "https://api.weixin.qq.com"
+const DefaultWXAPIHost = "https://api.weixin.qq.com"
 
 const HttpTTL = 1 * time.Minute
 

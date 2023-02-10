@@ -1,0 +1,30 @@
+package callbacks
+
+import "encoding/json"
+
+// {{ .Name }}
+// 文档: {{ .DocUrl }}
+
+func init() {
+	//添加可解析的回调事件
+	supportCallback({{ .StructName }}{})
+}
+
+{{ .StructCode }}
+func ({{ .StructName }}) GetMessageType() string {
+	return "{{ .MsgType }}"
+}
+
+func ({{ .StructName }}) GetEventType() string {
+	return "{{ .EventType }}"
+}
+
+func (m {{ .StructName }}) GetTypeKey() string {
+	return m.GetMessageType() + ":" + m.GetEventType()
+}
+
+func ({{ .StructName }}) ParseFromJson(data []byte) (CallBackExtraInfoInterface,error) {
+	var temp {{ .StructName }}
+	err := json.Unmarshal(data, &temp)
+	return temp, err
+}

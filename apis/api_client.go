@@ -21,8 +21,8 @@ type ApiClient struct {
 	logger Logger
 }
 
-// API客户端初始化
-func NewApiClient(appId, appSecret string, opts Options) *ApiClient {
+// 视频号小店API客户端初始化
+func NewShopApiClient(appId, appSecret string, opts Options) *ApiClient {
 	accessTokenName := "access_token"
 	c := ApiClient{
 		AppId:           appId,
@@ -40,7 +40,31 @@ func NewApiClient(appId, appSecret string, opts Options) *ApiClient {
 		c.logger = loggerPrint{}
 	}
 
-	c.accessToken.setGetTokenFunc(c.getAccessToken)
+	c.accessToken.setGetTokenFunc(c.getShopAccessToken)
+
+	return &c
+}
+
+// 视频号橱窗API客户端初始化
+func NewWindowApiClient(appId, appSecret string, opts Options) *ApiClient {
+	accessTokenName := "access_token"
+	c := ApiClient{
+		AppId:           appId,
+		AppSecret:       appSecret,
+		accessTokenName: accessTokenName,
+		accessToken: &token{
+			mutex:         &sync.RWMutex{},
+			dcsToken:      opts.DcsToken,
+			tokenCacheKey: fmt.Sprintf("%s#%s", accessTokenName, appId),
+		},
+		logger: opts.Logger,
+	}
+
+	if c.logger == nil {
+		c.logger = loggerPrint{}
+	}
+
+	c.accessToken.setGetTokenFunc(c.getWindowAccessToken)
 
 	return &c
 }
@@ -51,9 +75,9 @@ func (c *ApiClient) composeWXApiURL(path string, req interface{}) *url.URL {
 		values = valuer.intoURLValues()
 	}
 
-	base, err := url.Parse(DefaultQYAPIHost)
+	base, err := url.Parse(DefaultWXAPIHost)
 	if err != nil {
-		panic(fmt.Sprintf("qyapiHost invalid: host=%s err=%+v", DefaultQYAPIHost, err))
+		panic(fmt.Sprintf("qyapiHost invalid: host=%s err=%+v", DefaultWXAPIHost, err))
 	}
 
 	base.Path = path
