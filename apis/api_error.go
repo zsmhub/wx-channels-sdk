@@ -78,3 +78,21 @@ const ErrCode10020094 ErrCode = 10020094
 
 // 不合法的审核ID
 const ErrCode10020006 ErrCode = 10020006
+
+// 提交的资质数量超出限制
+const ErrCode10020080 ErrCode = 10020080
+
+// 品牌重复申请
+const ErrCode10020082 ErrCode = 10020082
+
+// 品牌名称与品牌库 ID 不匹配
+const ErrCode10020084 ErrCode = 10020084
+
+// 品牌资质文件的file_id无效
+const ErrCode10020086 ErrCode = 10020086
+
+// 品牌的申请记录不存在，请调用新增品牌接口
+const ErrCode10020081 ErrCode = 10020081
+
+// 该品牌申请正在审核中，请不要重复提交
+const ErrCode10020085 ErrCode = 10020085
