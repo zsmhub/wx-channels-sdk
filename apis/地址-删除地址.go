@@ -22,7 +22,7 @@ func (x ReqMerchantAddressDelete) intoBody() ([]byte, error) {
 }
 
 type RespMerchantAddressDelete struct {
-	Errcode string `json:"errcode"`
+	CommonResp
 }
 
 var _ bodyer = RespMerchantAddressDelete{}

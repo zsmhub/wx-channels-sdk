@@ -25,7 +25,10 @@ func (e *ClientError) Error() string {
 // ErrCode 错误码类型，目前只能在各个接口文档下查看可能出现的错误码类型
 type ErrCode int64
 
-// 系统繁忙，请开发者稍候再试
+// 请求的参数错误
+const ErrCodeMinus2 ErrCode = -2
+
+// 系统异常或系统繁忙，请开发者稍候再试
 const ErrCodeSysErr ErrCode = -1
 
 // 请求成功
@@ -420,3 +423,33 @@ const ErrCode10021054 ErrCode = 10021054
 
 // 请检查模板名是否已存在｜
 const ErrCode10021200 ErrCode = 10021200
+
+// 验证视频号身份失败, 请检查是否使用视频号橱窗 ID 请求
+const ErrCode10022001 ErrCode = 10022001
+
+// 因违规行为, 橱窗被禁止使用, 请前往'带货中心->个人中心->带货权限'检查橱窗带货权限
+const ErrCode10022002 ErrCode = 10022002
+
+// 橱窗商品未找到
+const ErrCode10022003 ErrCode = 10022003
+
+// 商品异常，禁止添加到橱窗，请检查商品的banned_detail字段
+const ErrCode10022004 ErrCode = 10022004
+
+// 橱窗中的商品数超过1万，请减少商品数目后再重试
+const ErrCode10022005 ErrCode = 10022005
+
+// 不支持操作带货中心来源的商品
+const ErrCode10022007 ErrCode = 10022007
+
+// 请求的 appid 不属于该视频号的绑定店铺
+const ErrCode10022008 ErrCode = 10022008
+
+// 请求参数错误，请检查请求参数是否符合限制
+const ErrCode10022006 ErrCode = 10022006
+
+// 请求的request_id不存在
+const ErrCode1 ErrCode = 1
+
+// 没有权限访问当前request_id对应的留资数据
+const ErrCode100000 ErrCode = 100000

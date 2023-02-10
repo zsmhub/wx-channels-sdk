@@ -212,5 +212,5 @@ const ErrCode%d ErrCode = %d
 		writeTotal++
 	}
 
-	fmt.Printf("共写入 %d 个新的错误码\n", writeTotal)
+	fmt.Printf("共新增 %d 个错误码\n", writeTotal)
 }
