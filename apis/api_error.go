@@ -297,3 +297,36 @@ const ErrCode10020206 ErrCode = 10020206
 
 // 该 sku 设置区域仓数量超过限制
 const ErrCode10020204 ErrCode = 10020204
+
+// 请求体格式不正确，请检查请求体中各个参数的类型是否正确
+const ErrCode47001 ErrCode = 47001
+
+// 请求体参数不正确，请检查各个参数是否按规范填写，具体原因查看errmsg
+const ErrCode40097 ErrCode = 40097
+
+// 无权调用本api，请检查相关权限是否已开通
+const ErrCode48001 ErrCode = 48001
+
+// 订单不存在，请检查订单号与 token 是否正确
+const ErrCode100002 ErrCode = 100002
+
+// 订单不是未付款订单，不能改价
+const ErrCode101100 ErrCode = 101100
+
+// 该订单改价次数已经超过50次
+const ErrCode108022 ErrCode = 108022
+
+// 某种商品或者运费修改后的价格超出原价
+const ErrCode108021 ErrCode = 108021
+
+// 修改后订单价格为0
+const ErrCode108023 ErrCode = 108023
+
+// 订单状态不正确，待发货订单才可以修改地址
+const ErrCode606000 ErrCode = 606000
+
+// 修改地址次数已经达到上限，不可超过5次
+const ErrCode606001 ErrCode = 606001
+
+// user_address字段未经过检查，请检查是否有必填字段未填写
+const ErrCode606002 ErrCode = 606002

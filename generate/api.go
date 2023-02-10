@@ -62,7 +62,7 @@ func main() {
 	if apiPrefixVar != nil {
 		filePrefix = *apiPrefixVar
 	}
-	filePrefix = "区域仓库" // todo test
+	filePrefix = "订单" // todo test
 
 	doc := tool.GetDoc(docURL)
 
