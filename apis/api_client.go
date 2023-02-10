@@ -21,8 +21,8 @@ type ApiClient struct {
 	logger Logger
 }
 
-// 视频号小店API客户端初始化
-func NewShopApiClient(appId, appSecret string, opts Options) *ApiClient {
+// API客户端初始化
+func NewApiClient(appId, appSecret string, opts Options) *ApiClient {
 	accessTokenName := "access_token"
 	c := ApiClient{
 		AppId:           appId,
@@ -40,31 +40,7 @@ func NewShopApiClient(appId, appSecret string, opts Options) *ApiClient {
 		c.logger = loggerPrint{}
 	}
 
-	c.accessToken.setGetTokenFunc(c.getShopAccessToken)
-
-	return &c
-}
-
-// 视频号橱窗API客户端初始化
-func NewWindowApiClient(appId, appSecret string, opts Options) *ApiClient {
-	accessTokenName := "access_token"
-	c := ApiClient{
-		AppId:           appId,
-		AppSecret:       appSecret,
-		accessTokenName: accessTokenName,
-		accessToken: &token{
-			mutex:         &sync.RWMutex{},
-			dcsToken:      opts.DcsToken,
-			tokenCacheKey: fmt.Sprintf("%s#%s", accessTokenName, appId),
-		},
-		logger: opts.Logger,
-	}
-
-	if c.logger == nil {
-		c.logger = loggerPrint{}
-	}
-
-	c.accessToken.setGetTokenFunc(c.getWindowAccessToken)
+	c.accessToken.setGetTokenFunc(c.getAccessToken)
 
 	return &c
 }

@@ -121,8 +121,8 @@ func Retry(o backoff.Operation) error {
 	return backoff.Retry(o, retryer)
 }
 
-// 获取视频号小店的access_token
-func (c *ApiClient) getShopAccessToken() (TokenInfo, error) {
+// 获取access_token
+func (c *ApiClient) getAccessToken() (TokenInfo, error) {
 	req := ReqGetAccessToken{
 		GrantType: "client_credential",
 		Appid:     c.AppId,
@@ -134,10 +134,4 @@ func (c *ApiClient) getShopAccessToken() (TokenInfo, error) {
 		return TokenInfo{}, err
 	}
 	return TokenInfo{Token: get.AccessToken, ExpiresIn: time.Duration(get.ExpiresIn) * time.Second}, nil
-}
-
-// 获取视频号橱窗的access_token
-func (c *ApiClient) getWindowAccessToken() (TokenInfo, error) {
-	// todo
-	return TokenInfo{}, nil
 }
