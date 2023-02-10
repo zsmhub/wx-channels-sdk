@@ -411,3 +411,12 @@ const ErrCode606031 ErrCode = 606031
 
 // 当前请求方不能对该订单进行发货，请使用特定第三方服务商身份进行发货操作
 const ErrCode606034 ErrCode = 606034
+
+// 非法的默认运费模板规则，默认运费模板不可以指定地址
+const ErrCode10021053 ErrCode = 10021053
+
+// 非法的省市区信息
+const ErrCode10021054 ErrCode = 10021054
+
+// 请检查模板名是否已存在｜
+const ErrCode10021200 ErrCode = 10021200
