@@ -453,3 +453,24 @@ const ErrCode1 ErrCode = 1
 
 // 没有权限访问当前request_id对应的留资数据
 const ErrCode100000 ErrCode = 100000
+
+// 图片格式不合法, 只支持 bmp, jpeg, jpg, png, gif, svg
+const ErrCode10020056 ErrCode = 10020056
+
+// 获取原图失败，请检查 url 是否合法
+const ErrCode10020057 ErrCode = 10020057
+
+// 上传图片失败，请重试
+const ErrCode10020058 ErrCode = 10020058
+
+// 图片为空
+const ErrCode10020059 ErrCode = 10020059
+
+// 图片大小超出限制
+const ErrCode10020060 ErrCode = 10020060
+
+// 图片 URL 非法，如：传入mmecimage.cn/p/前缀的图片
+const ErrCode10020061 ErrCode = 10020061
+
+// 不合法的 url ，递交的页面被 sitemap 标记为拦截
+const ErrCode40066 ErrCode = 40066

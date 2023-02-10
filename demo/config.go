@@ -4,7 +4,7 @@ package demo
 
 // 视频号小店配置
 var (
-	ShopAppId                  = "xxx"
+	ShopAppId                  = "xxxx"
 	ShopAppSecret              = "xxx"
 	ShopCallbackToken          = "xxx"
 	ShopCallbackEncodingAESKey = "xxx"

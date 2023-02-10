@@ -39,6 +39,27 @@ func ApiMain() {
 	} else {
 		fmt.Printf("%+v\n", resp3)
 	}
+
+	// 上传图片
+	//resp4, err4 := channels.Sdk.ShopClient.ExecImgUpload(apis.ReqImgUpload{
+	//	ImgUrl:   "https://img2.baidu.com/it/u=4106804942,1016065650&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=474",
+	//	RespType: 1,
+	//})
+	//if err4 != nil {
+	//	fmt.Println(err4)
+	//} else {
+	//	fmt.Printf("%+v\n", resp4)
+	//}
+
+	// 上传资质图片
+	//resp5, err5 := channels.Sdk.ShopClient.ExecQualificationUpload(apis.ReqQualificationUpload{
+	//	URL: "https://img2.baidu.com/it/u=4106804942,1016065650&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=474",
+	//})
+	//if err5 != nil {
+	//	fmt.Println(err5)
+	//} else {
+	//	fmt.Printf("%+v\n", resp5)
+	//}
 }
 
 // API客户端初始化

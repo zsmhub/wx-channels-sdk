@@ -1,10 +1,13 @@
 package apis
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/valyala/fasthttp"
+	"io"
+	"mime/multipart"
 	"net/http"
 	"net/url"
 	"sync"
@@ -129,6 +132,76 @@ func (c *ApiClient) executeWXApiPost(path string, req bodyer, objResp interface{
 	respBody := httpResp.Body()
 	if len(respBody) == 0 { // 避免 json.Unmarshal 出现 unexpected end of JSON input 错误
 		c.logger.Errorf("请求视频号路由=%s, req=%s, resp=%s, err=返回空响应体", path, string(reqBody), respBody)
+		return errors.New("http resp body is nil")
+	}
+
+	return json.Unmarshal(respBody, &objResp)
+}
+
+func (c *ApiClient) executeWXApiGetReturnByte(path string, req urlValuer, withAccessToken bool) ([]byte, error) {
+	wxUrlWithToken := c.composeWXURLWithToken(path, req, withAccessToken)
+	urlStr := wxUrlWithToken.String()
+
+	httpReq := fasthttp.AcquireRequest()
+	defer fasthttp.ReleaseRequest(httpReq)
+
+	httpResp := fasthttp.AcquireResponse()
+	defer fasthttp.ReleaseResponse(httpResp)
+
+	httpReq.SetRequestURI(urlStr)
+	httpReq.Header.SetMethod(http.MethodGet)
+
+	if err := FastClient.DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
+		return nil, err
+	}
+
+	return httpResp.Body(), nil
+}
+
+func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objResp interface{}, withAccessToken bool) error {
+	wxUrlWithToken := c.composeWXURLWithToken(path, req, withAccessToken)
+
+	urlStr := wxUrlWithToken.String()
+
+	m := req.getMedia()
+
+	httpReq := fasthttp.AcquireRequest()
+	defer fasthttp.ReleaseRequest(httpReq)
+
+	httpResp := fasthttp.AcquireResponse()
+	defer fasthttp.ReleaseResponse(httpResp)
+
+	// 新建一个缓冲，用于存放文件内容
+	bodyBufer := &bytes.Buffer{}
+	// 创建一个multipart文件写入器，方便按照http规定格式写入内容
+	bodyWriter := multipart.NewWriter(bodyBufer)
+	// 从bodyWriter生成fileWriter,并将文件内容写入fileWriter,多个文件可进行多次
+	fileWriter, err := bodyWriter.CreateFormFile("media", m.filename)
+	if err != nil {
+		c.logger.Error(err.Error())
+		return err
+	}
+
+	_, err = io.Copy(fileWriter, m.stream)
+	if err != nil {
+		return err
+	}
+
+	// 停止写入
+	_ = bodyWriter.Close()
+
+	httpReq.SetRequestURI(urlStr)
+	httpReq.Header.SetContentType(bodyWriter.FormDataContentType())
+	httpReq.SetBody(bodyBufer.Bytes())
+	httpReq.Header.SetMethod(http.MethodPost)
+
+	if err := FastClient.DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
+		return err
+	}
+
+	respBody := httpResp.Body()
+	if len(respBody) == 0 { // 避免 json.Unmarshal 出现 unexpected end of JSON input 错误
+		c.logger.Errorf("请求视频号路由=%s, resp=%s, err=返回空响应体", path, respBody)
 		return errors.New("http resp body is nil")
 	}
 

@@ -178,7 +178,7 @@ func generateApiErrCode(doc *goquery.Document) []ApiErrCode {
 			}
 			codeInt, _ := strconv.Atoi(tdSlice[0])
 			code := apis.ErrCode(codeInt)
-			if code == apis.ErrCodeSuccess || code == apis.ErrCodeSysErr {
+			if code == apis.ErrCodeSuccess || code == apis.ErrCodeSysErr || code == apis.ErrCodeMinus2 {
 				return
 			}
 			codeSlice = append(codeSlice, ApiErrCode{
