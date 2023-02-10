@@ -62,7 +62,6 @@ func main() {
 	if apiPrefixVar != nil {
 		filePrefix = *apiPrefixVar
 	}
-	filePrefix = "运费模板" // 固定式前缀，方便大量生成SDK
 
 	doc := tool.GetDoc(docURL)
 
