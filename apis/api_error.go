@@ -372,3 +372,42 @@ const ErrCode10021503 ErrCode = 10021503
 
 // 不是待商家举证的状态，无法留言
 const ErrCode10021504 ErrCode = 10021504
+
+// 订单更新过于频繁，更新订单失败，请重试
+const ErrCode100003 ErrCode = 100003
+
+// 当前订单有未完成售后单，不允许发货
+const ErrCode108009 ErrCode = 108009
+
+// 发货失败，请检查 errmsg 中返回的商品是否正确填写，包括订单中是否包含该商品，该商品是否已经发货，是否已经完成售后无法发货，以及商品数量是否填写正确等
+const ErrCode109000 ErrCode = 109000
+
+// 当前订单已经发货完成，不能重复发货
+const ErrCode109001 ErrCode = 109001
+
+// 当前发货请求里没有带上发货商品，请检查product_infos和is_all_product是否按规范填写
+const ErrCode109002 ErrCode = 109002
+
+// 当前订单已经下单在线物流单，不允许自寄发货
+const ErrCode109205 ErrCode = 109205
+
+// 商家没有默认退货地址，不可发货，请设置默认退货地址后再进行发货
+const ErrCode606003 ErrCode = 606003
+
+// delivery_id不合法，请使用【获取物流公司列表】接口获取合法的delivery_id
+const ErrCode606004 ErrCode = 606004
+
+// waybill_id不合法，请检查快递单号是否正确填写
+const ErrCode606005 ErrCode = 606005
+
+// deliver_type不符合要求，普通订单请使用快递发货，虚拟商品订单请无需物流发货，请检查订单deliver_method
+const ErrCode606008 ErrCode = 606008
+
+// 同一 sku 的所有商品必须在一个包裹里发出
+const ErrCode606030 ErrCode = 606030
+
+// 发货请求里product_id或sku_id填写不正确，请检查订单中是否包含该商品
+const ErrCode606031 ErrCode = 606031
+
+// 当前请求方不能对该订单进行发货，请使用特定第三方服务商身份进行发货操作
+const ErrCode606034 ErrCode = 606034

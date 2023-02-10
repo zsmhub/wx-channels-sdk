@@ -62,7 +62,7 @@ func main() {
 	if apiPrefixVar != nil {
 		filePrefix = *apiPrefixVar
 	}
-	filePrefix = "纠纷" // todo test
+	filePrefix = "物流" // 固定式前缀，方便大量生成SDK
 
 	doc := tool.GetDoc(docURL)
 
