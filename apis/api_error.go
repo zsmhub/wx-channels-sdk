@@ -279,3 +279,21 @@ const ErrCode10020090 ErrCode = 10020090
 
 // 抢购活动不存在
 const ErrCode10020076 ErrCode = 10020076
+
+// out_warehouse_id命名非法
+const ErrCode10020200 ErrCode = 10020200
+
+// address_id非法，或关联关系非法
+const ErrCode10020203 ErrCode = 10020203
+
+// 仓库名称或仓库介绍为空
+const ErrCode10020205 ErrCode = 10020205
+
+// out_warehouse_id不存在
+const ErrCode10020202 ErrCode = 10020202
+
+// 重复的out_warehouse_id
+const ErrCode10020206 ErrCode = 10020206
+
+// 该 sku 设置区域仓数量超过限制
+const ErrCode10020204 ErrCode = 10020204
