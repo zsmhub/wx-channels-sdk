@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 )
 
-// 商品编辑
+// 商品更新通知
 // 文档: 暂无
 
 func init() {
