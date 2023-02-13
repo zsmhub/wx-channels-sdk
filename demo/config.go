@@ -12,10 +12,10 @@ var (
 
 // 视频号橱窗配置
 var (
-	WindowAppId     = "xxx"
-	WindowAppSecret = "xxx"
-	//WindowCallbackToken          = "xxx"
-	//WindowCallbackEncodingAESKey = "xxx"
+	WindowAppId                  = "xxx"
+	WindowAppSecret              = "xxx"
+	WindowCallbackToken          = "xxx"
+	WindowCallbackEncodingAESKey = "xxx"
 )
 
 // redis 配置

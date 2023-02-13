@@ -12,6 +12,13 @@ func ApiMain() {
 		fmt.Println(err)
 	}
 
+	executeShopApi()
+
+	executeWindowApi()
+}
+
+// 视频号小店
+func executeShopApi() {
 	// 获取 access_token
 	resp, err := channels.Sdk.ShopClient.GetToken()
 	if err != nil {
@@ -62,6 +69,17 @@ func ApiMain() {
 	//}
 }
 
+// 视频号橱窗
+func executeWindowApi() {
+	// 获取 access_token
+	resp, err := channels.Sdk.WindowClient.GetToken()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("access_token: ", resp)
+	}
+}
+
 // API客户端初始化
 func initApiHandler() error {
 	// 初始化sdk参数
@@ -74,7 +92,7 @@ func initApiHandler() error {
 	channels.Sdk.NewShopApiClient(ShopAppId, ShopAppSecret)
 
 	// 视频号橱窗API客户端初始化
-	//channels.Sdk.NewWindowApiClient(WindowAppId, WindowAppSecret)
+	channels.Sdk.NewWindowApiClient(WindowAppId, WindowAppSecret)
 
 	return nil
 }

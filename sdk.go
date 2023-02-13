@@ -15,7 +15,7 @@ type sdk struct {
 	ShopClient   *apis.ApiClient            // API客户端，用于视频号小店的接口调用
 
 	// 视频号橱窗
-	WindowCallback *callbacks.CallBackHandler // 回调事件解析（todo tip: 目前暂无橱窗的回调事件需要处理，可忽略）
+	WindowCallback *callbacks.CallBackHandler // 回调事件解析
 	WindowClient   *apis.ApiClient            // API客户端，用于视频号橱窗的接口调用
 
 	apis.Options

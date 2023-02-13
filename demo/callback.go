@@ -60,9 +60,9 @@ func (callbackRepo) InitCallbackHandler() error {
 	}
 
 	// 视频号橱窗回调事件解析
-	//if err := channels.Sdk.NewWindowCallbackHandler(WindowCallbackToken, WindowCallbackEncodingAESKey); err != nil {
-	//   return err
-	//}
+	if err := channels.Sdk.NewWindowCallbackHandler(WindowCallbackToken, WindowCallbackEncodingAESKey); err != nil {
+		return err
+	}
 
 	return nil
 }
