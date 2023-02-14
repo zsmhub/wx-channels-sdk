@@ -29,12 +29,12 @@ type CallbackMessage struct {
 }
 
 func (m CallbackMessage) ParseMessageFromJson(body []byte) (CallbackMessage, error) {
-	m.OriginalMessage = string(body)
-
 	err := json.Unmarshal(body, &m)
 	if err != nil {
 		return m, err
 	}
+
+	m.OriginalMessage = string(body)
 
 	if m.MsgType == "" {
 		m.MsgType = MessageTypeUnknown
