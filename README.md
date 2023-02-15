@@ -65,15 +65,15 @@ func (callbackRepo) InitCallbackHandler() error {
 }
 
 // 视频号小店-解析并获取回调信息
-msg, err := channels.Sdk.ShopCallback.GetCallBackMsg(c.Request())
+msg, err := channels.Sdk.ShopCallback.GetCallbackMsg(c.Request())
 
 // 视频号橱窗-解析并获取回调信息
-msg, err := channels.Sdk.WindowCallback.GetCallBackMsg(c.Request())
+msg, err := channels.Sdk.WindowCallback.GetCallbackMsg(c.Request())
 
 
 // 视频号小店-处理回调事件完整示例
 func (callbackRepo) HandleShopPostReqShouest(c echo.Context) error {
-	msg, err := channels.Sdk.ShopCallback.GetCallBackMsg(c.Request())
+	msg, err := channels.Sdk.ShopCallback.GetCallbackMsg(c.Request())
 	if err != nil {
 		return err
 	}

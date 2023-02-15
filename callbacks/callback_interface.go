@@ -1,14 +1,14 @@
 package callbacks
 
-var callBackParseExtraInfoMap = make(map[string]CallBackExtraInfoInterface)
+var callbackParseExtraInfoMap = make(map[string]CallbackExtraInfoInterface)
 
-type CallBackExtraInfoInterface interface {
-	GetMessageType() string
-	GetEventType() string
-	GetTypeKey() string
-	ParseFromJson(data []byte) (CallBackExtraInfoInterface, error)
+type CallbackExtraInfoInterface interface {
+    GetMessageType() string
+    GetEventType() string
+    GetTypeKey() string
+    ParseFromJson(data []byte) (CallbackExtraInfoInterface, error)
 }
 
-func supportCallback(item CallBackExtraInfoInterface) {
-	callBackParseExtraInfoMap[item.GetTypeKey()] = item
+func supportCallback(item CallbackExtraInfoInterface) {
+    callbackParseExtraInfoMap[item.GetTypeKey()] = item
 }
