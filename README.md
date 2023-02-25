@@ -166,3 +166,4 @@ if err != nil {
 ### 推荐开源项目
 
 - [企业微信 GO SDK](https://github.com/zsmhub/workweixin)
+- [抖店开放平台GO SDK](https://github.com/zsmhub/doudian-sdk)
