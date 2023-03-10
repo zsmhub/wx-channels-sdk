@@ -9,20 +9,20 @@ import (
 
 type ReqOrderSearch struct {
 	NextKey               string                        `json:"next_key"`
-	OnAftersaleOrderExist int                           `json:"on_aftersale_order_exist"`
+	OnAftersaleOrderExist *int                          `json:"on_aftersale_order_exist,omitempty"`
 	PageSize              int                           `json:"page_size"`
 	SearchCondition       ReqOrderSearchSearchCondition `json:"search_condition"`
-	Status                int                           `json:"status"`
+	Status                int                           `json:"status,omitempty"`
 }
 
 type ReqOrderSearchSearchCondition struct {
-	CustomerNotes string `json:"customer_notes"`
-	MerchantNotes string `json:"merchant_notes"`
-	OrderID       string `json:"order_id"`
-	SkuCode       string `json:"sku_code"`
-	TelNumber     string `json:"tel_number"`
-	Title         string `json:"title"`
-	UserName      string `json:"user_name"`
+	CustomerNotes string `json:"customer_notes,omitempty"`
+	MerchantNotes string `json:"merchant_notes,omitempty"`
+	OrderID       string `json:"order_id,omitempty"`
+	SkuCode       string `json:"sku_code,omitempty"`
+	TelNumber     string `json:"tel_number,omitempty"`
+	Title         string `json:"title,omitempty"`
+	UserName      string `json:"user_name,omitempty"`
 }
 
 var _ bodyer = ReqOrderSearch{}

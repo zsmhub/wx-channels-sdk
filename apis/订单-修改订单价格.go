@@ -10,7 +10,7 @@ import (
 type ReqOrderPriceUpdate struct {
 	ChangeExpress    bool                   `json:"change_express"`
 	ChangeOrderInfos []ChangeOrderInfosItem `json:"change_order_infos"`
-	ExpressFee       int                    `json:"express_fee"`
+	ExpressFee       *int                   `json:"express_fee,omitempty"`
 	OrderID          string                 `json:"order_id"`
 }
 
