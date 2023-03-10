@@ -9,6 +9,9 @@ import (
 
 type ReqOrderListGet struct {
 	CreateTimeRange TimeRange `json:"create_time_range"`
+	UpdateTimeRange TimeRange `json:"update_time_range"`
+	Status          int       `json:"status"`
+	Openid          string    `json:"openid"`
 	NextKey         string    `json:"next_key"`
 	PageSize        int       `json:"page_size"`
 }
