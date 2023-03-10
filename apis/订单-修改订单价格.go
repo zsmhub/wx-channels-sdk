@@ -8,14 +8,16 @@ import (
 // 文档：https://developers.weixin.qq.com/doc/channels/API/order/price_update.html
 
 type ReqOrderPriceUpdate struct {
-	ChangeExpress    bool `json:"change_express"`
-	ChangeOrderInfos []struct {
-		ChangePrice int    `json:"change_price"`
-		ProductID   string `json:"product_id"`
-		SkuID       string `json:"sku_id"`
-	} `json:"change_order_infos"`
-	ExpressFee int    `json:"express_fee"`
-	OrderID    string `json:"order_id"`
+	ChangeExpress    bool                   `json:"change_express"`
+	ChangeOrderInfos []ChangeOrderInfosItem `json:"change_order_infos"`
+	ExpressFee       int                    `json:"express_fee"`
+	OrderID          string                 `json:"order_id"`
+}
+
+type ChangeOrderInfosItem struct {
+	ChangePrice int    `json:"change_price"`
+	ProductID   string `json:"product_id"`
+	SkuID       string `json:"sku_id"`
 }
 
 var _ bodyer = ReqOrderPriceUpdate{}

@@ -8,19 +8,21 @@ import (
 // 文档：https://developers.weixin.qq.com/doc/channels/API/order/search.html
 
 type ReqOrderSearch struct {
-	NextKey               string `json:"next_key"`
-	OnAftersaleOrderExist int    `json:"on_aftersale_order_exist"`
-	PageSize              int    `json:"page_size"`
-	SearchCondition       struct {
-		CustomerNotes string `json:"customer_notes"`
-		MerchantNotes string `json:"merchant_notes"`
-		OrderID       string `json:"order_id"`
-		SkuCode       string `json:"sku_code"`
-		TelNumber     string `json:"tel_number"`
-		Title         string `json:"title"`
-		UserName      string `json:"user_name"`
-	} `json:"search_condition"`
-	Status int `json:"status"`
+	NextKey               string                        `json:"next_key"`
+	OnAftersaleOrderExist int                           `json:"on_aftersale_order_exist"`
+	PageSize              int                           `json:"page_size"`
+	SearchCondition       ReqOrderSearchSearchCondition `json:"search_condition"`
+	Status                int                           `json:"status"`
+}
+
+type ReqOrderSearchSearchCondition struct {
+	CustomerNotes string `json:"customer_notes"`
+	MerchantNotes string `json:"merchant_notes"`
+	OrderID       string `json:"order_id"`
+	SkuCode       string `json:"sku_code"`
+	TelNumber     string `json:"tel_number"`
+	Title         string `json:"title"`
+	UserName      string `json:"user_name"`
 }
 
 var _ bodyer = ReqOrderSearch{}
