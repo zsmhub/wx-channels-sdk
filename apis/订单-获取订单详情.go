@@ -80,15 +80,28 @@ type RespOrderGet struct {
 				ProductPrice    int  `json:"product_price"`
 			} `json:"price_info"`
 			ProductInfos []struct {
-				FinishAftersaleSkuCnt int    `json:"finish_aftersale_sku_cnt"`
-				MarketPrice           int    `json:"market_price"`
-				OnAftersaleSkuCnt     int    `json:"on_aftersale_sku_cnt"`
 				ProductID             string `json:"product_id"`
-				SalePrice             int    `json:"sale_price"`
-				SkuCnt                int    `json:"sku_cnt"`
 				SkuID                 string `json:"sku_id"`
 				ThumbImg              string `json:"thumb_img"`
+				SkuCnt                int    `json:"sku_cnt"`
+				SalePrice             int    `json:"sale_price"`
 				Title                 string `json:"title"`
+				OnAftersaleSkuCnt     int    `json:"on_aftersale_sku_cnt"`
+				FinishAftersaleSkuCnt int    `json:"finish_aftersale_sku_cnt"`
+				SkuCode               string `json:"sku_code"`
+				MarketPrice           int    `json:"market_price"`
+				SkuAttrs              []struct {
+					AttrKey   string `json:"attr_key"`
+					AttrValue string `json:"attr_value"`
+				} `json:"sku_attrs"`
+				RealPrice      int    `json:"real_price"`
+				OutProductId   string `json:"out_product_id"`
+				OutSkuId       string `json:"out_sku_id"`
+				IsDiscounted   bool   `json:"is_discounted"`
+				EstimatePrice  int    `json:"estimate_price"`
+				IsChangePrice  bool   `json:"is_change_price"`
+				ChangePrice    int    `json:"change_price"`
+				OutWarehouseId string `json:"out_warehouse_id"`
 			} `json:"product_infos"`
 		} `json:"order_detail"`
 		OrderID    string `json:"order_id"`
