@@ -38,7 +38,8 @@ go get github.com/zsmhub/wx-channels-sdk
 
     > tip：
     > 1. Get 方式的接口量少没做兼容，请求参数需手动整理到 Req 结构体，Post 则不用
-    > 2. 部分复杂的页面需要手动整理下sdk。
+    > 2. 部分接口文档的请求/响应 json 示例，如果缺少部分字段，需手动补上
+    > 3. 部分复杂的页面需要手动整理下sdk
 
 ### sdk调用示例
 
