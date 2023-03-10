@@ -17,8 +17,8 @@ type ReqOrderListGet struct {
 }
 
 type TimeRange struct {
-	EndTime   int `json:"end_time"`
 	StartTime int `json:"start_time"`
+	EndTime   int `json:"end_time"`
 }
 
 var _ bodyer = ReqOrderListGet{}
