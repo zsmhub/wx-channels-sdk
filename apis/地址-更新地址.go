@@ -8,31 +8,7 @@ import (
 // 文档：https://developers.weixin.qq.com/doc/channels/API/merchant/address/update.html
 
 type ReqMerchantAddressUpdate struct {
-	AddressDetail struct {
-		AddressID   string `json:"address_id"`
-		AddressInfo struct {
-			CityName     string  `json:"city_name"`
-			CountyName   string  `json:"county_name"`
-			DetailInfo   string  `json:"detail_info"`
-			HouseNumber  string  `json:"house_number"`
-			Lat          float64 `json:"lat"`
-			Lng          float64 `json:"lng"`
-			PostalCode   string  `json:"postal_code"`
-			ProvinceName string  `json:"province_name"`
-			TelNumber    string  `json:"tel_number"`
-			UserName     string  `json:"user_name"`
-		} `json:"address_info"`
-		AddressType struct {
-			Pickup   int `json:"pickup"`
-			SameCity int `json:"same_city"`
-		} `json:"address_type"`
-		DefaultRecv int    `json:"default_recv"`
-		DefaultSend int    `json:"default_send"`
-		Landline    string `json:"landline"`
-		RecvAddr    int    `json:"recv_addr"`
-		Remark      string `json:"remark"`
-		SendAddr    int    `json:"send_addr"`
-	} `json:"address_detail"`
+	AddressDetail MerchantAddressDetail `json:"address_detail"`
 }
 
 var _ bodyer = ReqMerchantAddressUpdate{}

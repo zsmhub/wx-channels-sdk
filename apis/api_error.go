@@ -474,3 +474,57 @@ const ErrCode10020061 ErrCode = 10020061
 
 // 不合法的 url ，递交的页面被 sitemap 标记为拦截
 const ErrCode40066 ErrCode = 40066
+
+// 优惠券名称太长
+const ErrCode10021005 ErrCode = 10021005
+
+// 校验折扣数失败
+const ErrCode10021006 ErrCode = 10021006
+
+// 校验优惠价格失败
+const ErrCode10021007 ErrCode = 10021007
+
+// 校验直减券是否小于最低价格
+const ErrCode10021008 ErrCode = 10021008
+
+// 校验领取时间失败
+const ErrCode10021009 ErrCode = 10021009
+
+// 校验有效时间失败
+const ErrCode10021010 ErrCode = 10021010
+
+// 校验优惠券总发放量失败
+const ErrCode10021011 ErrCode = 10021011
+
+// 校验限领失败
+const ErrCode10021012 ErrCode = 10021012
+
+// 校验商户失败
+const ErrCode10021013 ErrCode = 10021013
+
+// 推广类型不对
+const ErrCode10021014 ErrCode = 10021014
+
+// 校验入参失败，含有非商户的指定商品
+const ErrCode10021021 ErrCode = 10021021
+
+// 优惠券信息违规
+const ErrCode10021024 ErrCode = 10021024
+
+// 创建 优惠券类型 暂不支持
+const ErrCode10021035 ErrCode = 10021035
+
+// 优惠券不存在
+const ErrCode10021037 ErrCode = 10021037
+
+// 优惠券状态不对
+const ErrCode10021001 ErrCode = 10021001
+
+// 优惠券还没过期
+const ErrCode10021003 ErrCode = 10021003
+
+// 优惠券重入失败
+const ErrCode10021034 ErrCode = 10021034
+
+// 分页拉优惠券列表，页码与上次请求相差过大
+const ErrCode10021036 ErrCode = 10021036
