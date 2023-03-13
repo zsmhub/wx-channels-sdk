@@ -27,18 +27,18 @@ type RespCouponGetUserCoupon struct {
 	Openid     string `json:"openid"`
 	Unionid    string `json:"unionid"`
 	UserCoupon struct {
-		CouponID    string `json:"coupon_id"`
-		CreateTime  int    `json:"create_time"`
-		DiscountFee int    `json:"discount_fee"`
-		EndTime     int    `json:"end_time"`
-		ExtInfo     struct {
+		UserCouponID string `json:"user_coupon_id"`
+		CouponID     string `json:"coupon_id"`
+		Status       int    `json:"status"`
+		CreateTime   int    `json:"create_time"`
+		UpdateTime   int    `json:"update_time"`
+		StartTime    int    `json:"start_time"`
+		EndTime      int    `json:"end_time"`
+		ExtInfo      struct {
 			UseTime int `json:"use_time"`
 		} `json:"ext_info"`
-		OrderID      string `json:"order_id"`
-		StartTime    int    `json:"start_time"`
-		Status       int    `json:"status"`
-		UpdateTime   int    `json:"update_time"`
-		UserCouponID string `json:"user_coupon_id"`
+		OrderID     string `json:"order_id"`
+		DiscountFee int    `json:"discount_fee"`
 	} `json:"user_coupon"`
 }
 
