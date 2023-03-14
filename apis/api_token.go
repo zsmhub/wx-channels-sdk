@@ -83,7 +83,7 @@ func (t *token) syncToken() error {
 				tokenInfo.ExpiresIn = get.ExpiresIn
 				tokenInfo.LastRefresh = now
 
-				if err := t.dcsToken.Set(t.tokenCacheKey, tokenInfo, time.Hour*2); err != nil {
+				if err := t.dcsToken.Set(t.tokenCacheKey, tokenInfo, tokenInfo.ExpiresIn); err != nil {
 					return err
 				}
 			} else {
