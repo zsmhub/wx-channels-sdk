@@ -8,17 +8,20 @@ import (
 // 文档：https://developers.weixin.qq.com/doc/channels/API/order/delivery_send.html
 
 type ReqOrderDeliverySend struct {
-	DeliveryList []struct {
-		DeliverType  int    `json:"deliver_type"`
-		DeliveryID   string `json:"delivery_id"`
-		ProductInfos []struct {
-			ProductCnt int    `json:"product_cnt"`
-			ProductID  string `json:"product_id"`
-			SkuID      string `json:"sku_id"`
-		} `json:"product_infos"`
-		WaybillID string `json:"waybill_id"`
-	} `json:"delivery_list"`
-	OrderID string `json:"order_id"`
+	DeliveryList []DeliveryListItem `json:"delivery_list"`
+	OrderID      string             `json:"order_id"`
+}
+
+type DeliveryListItem struct {
+	DeliverType  int                   `json:"deliver_type"`
+	DeliveryID   string                `json:"delivery_id"`
+	ProductInfos []DeliveryProductInfo `json:"product_infos"`
+	WaybillID    string                `json:"waybill_id"`
+}
+type DeliveryProductInfo struct {
+	ProductCnt int    `json:"product_cnt"`
+	ProductID  string `json:"product_id"`
+	SkuID      string `json:"sku_id"`
 }
 
 var _ bodyer = ReqOrderDeliverySend{}
