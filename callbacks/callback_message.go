@@ -22,7 +22,7 @@ type CallbackMessage struct {
 	EventType EventType `json:"Event"`
 
 	// 额外的信息
-	Extras CallbackExtraInfoInterface `json:"Extras"`
+	Extras CallbackExtraInfoInterface `json:"-"`
 
 	// 原始回调内容，方便排查问题
 	OriginalMessage string `json:"OriginalMessage"`

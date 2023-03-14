@@ -1,8 +1,6 @@
 package callbacks
 
-import (
-	"encoding/json"
-)
+import "github.com/tidwall/gjson"
 
 // 商品审核
 // 文档: https://developers.weixin.qq.com/doc/channels/API/product/callback/ProductSpuAudit.html
@@ -12,14 +10,14 @@ func init() {
 }
 
 type EventProductSpuAudit struct {
-	ToUserName      string `json:"ToUserName"`
-	FromUserName    string `json:"FromUserName"`
-	CreateTime      int    `json:"CreateTime"`
-	MsgType         string `json:"MsgType"`
+	CreateTime      int64  `json:"CreateTime"`
 	Event           string `json:"Event"`
+	FromUserName    string `json:"FromUserName"`
+	MsgType         string `json:"MsgType"`
+	ToUserName      string `json:"ToUserName"`
 	ProductSpuAudit struct {
-		ProductID int    `json:"product_id"`
-		Status    int    `json:"status"`
+		ProductID string `json:"product_id"`
+		Status    int64  `json:"status"`
 		Reason    string `json:"reason"`
 	} `json:"ProductSpuAudit"`
 }
@@ -37,7 +35,21 @@ func (m EventProductSpuAudit) GetTypeKey() string {
 }
 
 func (EventProductSpuAudit) ParseFromJson(data []byte) (CallbackExtraInfoInterface, error) {
-	var temp EventProductSpuAudit
-	err := json.Unmarshal(data, &temp)
-	return temp, err
+	var temp = EventProductSpuAudit{
+		CreateTime:   gjson.GetBytes(data, "CreateTime").Int(),
+		Event:        gjson.GetBytes(data, "Event").String(),
+		FromUserName: gjson.GetBytes(data, "FromUserName").String(),
+		MsgType:      gjson.GetBytes(data, "MsgType").String(),
+		ToUserName:   gjson.GetBytes(data, "ToUserName").String(),
+		ProductSpuAudit: struct {
+			ProductID string `json:"product_id"`
+			Status    int64  `json:"status"`
+			Reason    string `json:"reason"`
+		}{
+			ProductID: gjson.GetBytes(data, "ProductSpuAudit.product_id").String(),
+			Status:    gjson.GetBytes(data, "ProductSpuAudit.status").Int(),
+			Reason:    gjson.GetBytes(data, "ProductSpuAudit.reason").String(),
+		},
+	}
+	return temp, nil
 }

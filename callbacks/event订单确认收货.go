@@ -1,6 +1,8 @@
 package callbacks
 
-import "encoding/json"
+import (
+	"github.com/tidwall/gjson"
+)
 
 // 订单确认收货
 // 文档: https://developers.weixin.qq.com/doc/channels/API/order/callback/channels_ec_order_confirm.html
@@ -11,14 +13,14 @@ func init() {
 }
 
 type ChannelsEcOrderConfirm struct {
-	CreateTime   int    `json:"CreateTime"`
+	CreateTime   int64  `json:"CreateTime"`
 	Event        string `json:"Event"`
 	FromUserName string `json:"FromUserName"`
 	MsgType      string `json:"MsgType"`
 	ToUserName   string `json:"ToUserName"`
 	OrderInfo    struct {
-		ConfirmType int `json:"confirm_type"`
-		OrderID     int `json:"order_id"`
+		ConfirmType int64  `json:"confirm_type"`
+		OrderID     string `json:"order_id"`
 	} `json:"order_info"`
 }
 
@@ -35,7 +37,19 @@ func (m ChannelsEcOrderConfirm) GetTypeKey() string {
 }
 
 func (ChannelsEcOrderConfirm) ParseFromJson(data []byte) (CallbackExtraInfoInterface, error) {
-	var temp ChannelsEcOrderConfirm
-	err := json.Unmarshal(data, &temp)
-	return temp, err
+	var temp = ChannelsEcOrderConfirm{
+		CreateTime:   gjson.GetBytes(data, "CreateTime").Int(),
+		Event:        gjson.GetBytes(data, "Event").String(),
+		FromUserName: gjson.GetBytes(data, "FromUserName").String(),
+		MsgType:      gjson.GetBytes(data, "MsgType").String(),
+		ToUserName:   gjson.GetBytes(data, "ToUserName").String(),
+		OrderInfo: struct {
+			ConfirmType int64  `json:"confirm_type"`
+			OrderID     string `json:"order_id"`
+		}{
+			ConfirmType: gjson.GetBytes(data, "order_info.confirm_type").Int(),
+			OrderID:     gjson.GetBytes(data, "order_info.order_id").String(),
+		},
+	}
+	return temp, nil
 }

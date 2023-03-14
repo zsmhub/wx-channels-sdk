@@ -1,6 +1,8 @@
 package callbacks
 
-import "encoding/json"
+import (
+	"github.com/tidwall/gjson"
+)
 
 // 订单状态变更通知【注意该回调跟其他订单状态回调重复了，如下单，会同时推“送订单下单”和“订单状态变更通知”两个回调事件】
 // 文档: 暂无
@@ -11,14 +13,14 @@ func init() {
 }
 
 type ProductOrderStatusUpdate struct {
-	ToUserName               string `json:"ToUserName"`
-	FromUserName             string `json:"FromUserName"`
-	CreateTime               int    `json:"CreateTime"`
-	MsgType                  string `json:"MsgType"`
+	CreateTime               int64  `json:"CreateTime"`
 	Event                    string `json:"Event"`
+	FromUserName             string `json:"FromUserName"`
+	MsgType                  string `json:"MsgType"`
+	ToUserName               string `json:"ToUserName"`
 	ProductOrderStatusUpdate struct {
-		OrderId int64 `json:"order_id"`
-		Status  int   `json:"status"`
+		OrderID string `json:"order_id"`
+		Status  int64  `json:"status"`
 	} `json:"ProductOrderStatusUpdate"`
 }
 
@@ -35,7 +37,19 @@ func (m ProductOrderStatusUpdate) GetTypeKey() string {
 }
 
 func (ProductOrderStatusUpdate) ParseFromJson(data []byte) (CallbackExtraInfoInterface, error) {
-	var temp ProductOrderStatusUpdate
-	err := json.Unmarshal(data, &temp)
-	return temp, err
+	var temp = ProductOrderStatusUpdate{
+		CreateTime:   gjson.GetBytes(data, "CreateTime").Int(),
+		Event:        gjson.GetBytes(data, "Event").String(),
+		FromUserName: gjson.GetBytes(data, "FromUserName").String(),
+		MsgType:      gjson.GetBytes(data, "MsgType").String(),
+		ToUserName:   gjson.GetBytes(data, "ToUserName").String(),
+		ProductOrderStatusUpdate: struct {
+			OrderID string `json:"order_id"`
+			Status  int64  `json:"status"`
+		}{
+			OrderID: gjson.GetBytes(data, "order_info.order_id").String(),
+			Status:  gjson.GetBytes(data, "order_info.status").Int(),
+		},
+	}
+	return temp, nil
 }

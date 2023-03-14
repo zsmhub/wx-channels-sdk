@@ -1,6 +1,6 @@
 package callbacks
 
-import "encoding/json"
+import "github.com/tidwall/gjson"
 
 // 订单结算成功
 // 文档: https://developers.weixin.qq.com/doc/channels/API/order/callback/channels_ec_order_settle.html
@@ -11,14 +11,14 @@ func init() {
 }
 
 type ChannelsEcOrderSettle struct {
-	CreateTime   int    `json:"CreateTime"`
+	CreateTime   int64  `json:"CreateTime"`
 	Event        string `json:"Event"`
 	FromUserName string `json:"FromUserName"`
 	MsgType      string `json:"MsgType"`
 	ToUserName   string `json:"ToUserName"`
 	OrderInfo    struct {
-		OrderID    int `json:"order_id"`
-		SettleTime int `json:"settle_time"`
+		OrderID    string `json:"order_id"`
+		SettleTime int64  `json:"settle_time"`
 	} `json:"order_info"`
 }
 
@@ -35,7 +35,19 @@ func (m ChannelsEcOrderSettle) GetTypeKey() string {
 }
 
 func (ChannelsEcOrderSettle) ParseFromJson(data []byte) (CallbackExtraInfoInterface, error) {
-	var temp ChannelsEcOrderSettle
-	err := json.Unmarshal(data, &temp)
-	return temp, err
+	var temp = ChannelsEcOrderSettle{
+		CreateTime:   gjson.GetBytes(data, "CreateTime").Int(),
+		Event:        gjson.GetBytes(data, "Event").String(),
+		FromUserName: gjson.GetBytes(data, "FromUserName").String(),
+		MsgType:      gjson.GetBytes(data, "MsgType").String(),
+		ToUserName:   gjson.GetBytes(data, "ToUserName").String(),
+		OrderInfo: struct {
+			OrderID    string `json:"order_id"`
+			SettleTime int64  `json:"settle_time"`
+		}{
+			OrderID:    gjson.GetBytes(data, "order_info.order_id").String(),
+			SettleTime: gjson.GetBytes(data, "order_info.settle_time").Int(),
+		},
+	}
+	return temp, nil
 }
