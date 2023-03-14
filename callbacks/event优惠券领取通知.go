@@ -18,8 +18,8 @@ type ChannelsEcCouponReceive struct {
 	ToUserName   string `json:"ToUserName"`
 	ReceiveInfo  struct {
 		CouponID     int    `json:"coupon_id"`
-		ReceiveTime  int    `json:"receive_time"`
-		UserCouponID string `json:"user_coupon_id"`
+		ReceiveTime  string `json:"receive_time"`
+		UserCouponID int    `json:"user_coupon_id"`
 	} `json:"receive_info"`
 }
 
