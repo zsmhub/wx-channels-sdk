@@ -7,7 +7,11 @@ import (
 // 上传退款凭证
 // 文档：https://developers.weixin.qq.com/doc/channels/API/aftersale/uploadrefundcertificate.html
 
-type ReqAftersaleUploadrefundcertificate struct{}
+type ReqAftersaleUploadrefundcertificate struct {
+	AfterSaleOrderID   string   `json:"after_sale_order_id"`
+	RefundCertificates []string `json:"refund_certificates"`
+	Desc               string   `json:"desc"`
+}
 
 var _ bodyer = ReqAftersaleUploadrefundcertificate{}
 
