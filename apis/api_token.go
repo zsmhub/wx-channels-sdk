@@ -58,7 +58,7 @@ func (t *token) getToken() string {
 }
 
 func (t *token) syncToken() error {
-	var refreshHour int64 = 3600 // access_token刷新时间间隔，单位秒
+	var refreshHour int64 = 600 // access_token刷新时间间隔，单位秒
 	var now = time.Now()
 
 	var tokenInfo TokenInfo
@@ -83,7 +83,7 @@ func (t *token) syncToken() error {
 				tokenInfo.ExpiresIn = get.ExpiresIn
 				tokenInfo.LastRefresh = now
 
-				if err := t.dcsToken.Set(t.tokenCacheKey, tokenInfo, time.Hour*2); err != nil {
+				if err := t.dcsToken.Set(t.tokenCacheKey, tokenInfo, tokenInfo.ExpiresIn); err != nil {
 					return err
 				}
 			} else {
