@@ -134,12 +134,12 @@ resp, err := channels.Sdk.ShopClient.ExecEcBasicsInfoGet(apis.ReqEcBasicsInfoGet
 
 // error code 类型强制转换
 if err != nil {
-    if apiError, ok := err.(*apis.ClientError); ok {
-        if apiError.Code == apis.ErrCode40013 {
-            return errors.New("不合法的 AppID")
-        }
-    }
-    return nil, err
+	if apiError, ok := err.(*apis.ClientError); ok {
+		if apiError.Code == apis.ErrCode40013 {
+			return errors.New("不合法的 AppID")
+	 	}
+	}
+	return nil, err
 }
 
 ```
@@ -163,6 +163,7 @@ if err != nil {
 ### 注意点
 
 - 如果你发现了sdk中，没有某个回调事件或某个api，可以使用一键生成sdk代码命令生成，然后提交下pr
+- 注意视频号access_token不支持互刷，获取了新的access_token，旧的access_token就会很快失效
 
 ### 推荐开源项目
 
