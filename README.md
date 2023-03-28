@@ -150,6 +150,7 @@ if err != nil {
 .
 ├── apis                     视频号API
 │   └── api.error.go         全局错误码
+│   └── api.constant.go      全局枚举值定义
 ├── callbacks                视频号回调事件
 │   └── callback_constant.go 回调事件常量定义
 ├── demo                     sdk调用示例
