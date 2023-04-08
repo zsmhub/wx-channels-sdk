@@ -150,7 +150,6 @@ if err != nil {
 .
 ├── apis                     视频号API
 │   └── api.error.go         全局错误码
-│   └── api.constant.go      全局枚举值定义
 ├── callbacks                视频号回调事件
 │   └── callback_constant.go 回调事件常量定义
 ├── demo                     sdk调用示例
@@ -158,6 +157,7 @@ if err != nil {
 │   ├── api.go               一键生成视频号API脚本
 │   └── callback.go          一键生成企微回调事件脚本
 ├── internal                 消息加解密库
+├── constant.go              全局枚举值定义
 └── sdk.go                   入口文件
 ```
 
@@ -170,3 +170,5 @@ if err != nil {
 
 - [企业微信 GO SDK](https://github.com/zsmhub/workweixin)
 - [抖店开放平台GO SDK](https://github.com/zsmhub/doudian-sdk)
+- [微信视频号GO SDK](https://github.com/zsmhub/wx-channels-sdk)
+- [小红书开放平台 GO SDK](https://github.com/zsmhub/xhs-sdk)
