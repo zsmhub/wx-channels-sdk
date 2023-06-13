@@ -1,5 +1,7 @@
 ## 微信视频号 GO SDK
 
+[官方接口文档](https://developers.weixin.qq.com/doc/channels/API/basics/getaccesstoken.html)
+
 Go语言实现微信视频号sdk（自建应用维度），集成了视频号小店和视频号橱窗的功能，使用简单，扩展灵活
 
 - 支持一键生成sdk代码，包括api和回调事件
