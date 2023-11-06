@@ -528,3 +528,15 @@ const ErrCode10021034 ErrCode = 10021034
 
 // 分页拉优惠券列表，页码与上次请求相差过大
 const ErrCode10021036 ErrCode = 10021036
+
+// 暂无数据
+const ErrCode10021302 ErrCode = 10021302
+
+// 暂无数据
+const ErrCode9710001 ErrCode = 9710001
+
+// ticket已失效
+const ErrCode60220 ErrCode = 60220
+
+// 错误的ticket
+const ErrCode60208 ErrCode = 60208

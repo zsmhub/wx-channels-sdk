@@ -83,9 +83,17 @@ func main() {
 	if apiURL == "" {
 		tool.Die("获取不到接口请求地址")
 	}
+	apiURL = strings.ReplaceAll(apiURL, "http请求方式：", "")
 	apiURLSlice := strings.Split(apiURL, " ")
 	if len(apiURLSlice) < 2 {
-		tool.Die("接口调用请求说明：文档有误，apiUrlSlice=%+v", apiURLSlice)
+		for _, v := range []string{"POST", "GET", "PUT", "DELETE"} {
+			apiURL = strings.ReplaceAll(apiURL, v, v+" ")
+			break
+		}
+		apiURLSlice = strings.Split(apiURL, " ")
+	}
+	if len(apiURLSlice) < 2 {
+		tool.Die("接口调用请求说明：文档不规范，代码需要兼容下~")
 	}
 	api.Method = strcase.ToCamel(strings.ToLower(apiURLSlice[0]))
 	api.ApiURL = apiURLSlice[1]
@@ -192,7 +200,7 @@ func generateApiErrCode(doc *goquery.Document) []ApiErrCode {
 
 func addApiErrorCodeToFile(codes []ApiErrCode) {
 	if len(codes) == 0 {
-		fmt.Printf("注意：没发现错误码，可能是文档格式不统一\n")
+		fmt.Printf("共新增 0 个错误码\n")
 		return
 	}
 	filename := "./apis/api_error.go"
