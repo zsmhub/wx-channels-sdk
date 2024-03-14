@@ -84,3 +84,6 @@ const EventTypeChannelsEcWithdrawNotify EventType = "channels_ec_withdraw_notify
 
 // 提现二维码回调
 const EventTypeQrcodeStatus EventType = "qrcode_status"
+
+// 订单其他信息更新
+const EventTypeChannelsEcOrderExtInfoUpdate EventType = "channels_ec_order_ext_info_update"

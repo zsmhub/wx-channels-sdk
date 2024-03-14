@@ -23,7 +23,7 @@ func (m {{ .StructName }}) GetTypeKey() string {
 	return m.GetMessageType() + ":" + m.GetEventType()
 }
 
-func ({{ .StructName }}) ParseFromJson(data []byte) (CallBackExtraInfoInterface,error) {
+func ({{ .StructName }}) ParseFromJson(data []byte) (CallbackExtraInfoInterface,error) {
 	var temp {{ .StructName }}
 	err := json.Unmarshal(data, &temp)
 	return temp, err
