@@ -540,3 +540,45 @@ const ErrCode60220 ErrCode = 60220
 
 // 错误的ticket
 const ErrCode60208 ErrCode = 60208
+
+// 电子面单帐号列表为空，请检查请求参数
+const ErrCode10025120 ErrCode = 10025120
+
+// 快递公司不支持
+const ErrCode10025102 ErrCode = 10025102
+
+// delivery_id错误
+const ErrCode10025012 ErrCode = 10025012
+
+// 网点信息错误
+const ErrCode10025013 ErrCode = 10025013
+
+// 网点账号编码错误
+const ErrCode10025014 ErrCode = 10025014
+
+// 寄件人信息错误
+const ErrCode10025015 ErrCode = 10025015
+
+// 收件人信息错误
+const ErrCode10025016 ErrCode = 10025016
+
+// 小店订单信息错误
+const ErrCode10025017 ErrCode = 10025017
+
+// 店铺id信息错误
+const ErrCode10025018 ErrCode = 10025018
+
+// 下单失败，具体原因参考delivery_error_msg字段
+const ErrCode10025005 ErrCode = 10025005
+
+// 面单已存在
+const ErrCode10025019 ErrCode = 10025019
+
+// 取消下单失败，具体原因参考delivery_error_msg字段
+const ErrCode10025006 ErrCode = 10025006
+
+// 电子面单不存在
+const ErrCode10025010 ErrCode = 10025010
+
+// 更新冲突，请稍后重试
+const ErrCode10025011 ErrCode = 10025011
