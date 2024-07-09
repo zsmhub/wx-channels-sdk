@@ -103,7 +103,7 @@ type RespOrderGet struct {
 				MerchantNotes string `json:"merchant_notes"`
 			} `json:"ext_info"`
 			CommissionInfos []struct {
-				SkuID    int    `json:"sku_id"`
+				SkuID    string `json:"sku_id"`
 				Nickname string `json:"nickname"`
 				Type     int    `json:"type"`
 				Status   int    `json:"status"`
