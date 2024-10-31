@@ -1,6 +1,9 @@
 ## 微信视频号 GO SDK
 
-[官方接口文档](https://developers.weixin.qq.com/doc/channels/API/basics/getaccesstoken.html)
+> “视频号小店”在2024年9月25日正式更名为“微信小店”，API调用不受影响。
+
+- [视频号小店-官方接口文档](https://developers.weixin.qq.com/doc/channels/API/basics/getaccesstoken.html)
+- [微信小店-官方接口文档](https://developers.weixin.qq.com/doc/store/API/basics/getaccesstoken.html)
 
 Go语言实现微信视频号sdk（自建应用维度），集成了视频号小店和视频号橱窗的功能，使用简单，扩展灵活
 
