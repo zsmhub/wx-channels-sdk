@@ -111,3 +111,6 @@ const EventTypeChannelsEcUserCouponUnuse EventType = "channels_ec_user_coupon_un
 
 // 优惠券核销通知
 const EventTypeChannelsEcUserCouponUse EventType = "channels_ec_user_coupon_use"
+
+// 物流轨迹推送通知
+const EventTypeEwaybillPushPath EventType = "ewaybill_push_path"

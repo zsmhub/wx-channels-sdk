@@ -17,9 +17,9 @@ type ChannelsEcUserCouponExpire struct {
 	MsgType        string `json:"MsgType"`
 	ToUserName     string `json:"ToUserName"`
 	UserCouponInfo struct {
-		CouponID     string `json:"coupon_id"`
-		ExpireTime   string `json:"expire_time"`
-		UserCouponID string `json:"user_coupon_id"`
+		CouponID     interface{} `json:"coupon_id"`
+		ExpireTime   string      `json:"expire_time"`
+		UserCouponID interface{} `json:"user_coupon_id"`
 	} `json:"user_coupon_info"`
 }
 

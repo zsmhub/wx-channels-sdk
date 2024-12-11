@@ -8,10 +8,9 @@ import (
 // 文档：https://developers.weixin.qq.com/doc/channels/API/coupon/get_list.html
 
 type ReqCouponGetList struct {
-	Page     int    `json:"page"`
-	PageCtx  string `json:"page_ctx"`
-	PageSize int    `json:"page_size"`
-	Status   int    `json:"status"`
+	Page     int `json:"page"`
+	PageSize int `json:"page_size"`
+	Status   int `json:"status"`
 }
 
 var _ bodyer = ReqCouponGetList{}
