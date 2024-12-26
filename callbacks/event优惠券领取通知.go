@@ -19,9 +19,9 @@ type ChannelsEcCouponReceive struct {
 	MsgType      string `json:"MsgType"`
 	ToUserName   string `json:"ToUserName"`
 	ReceiveInfo  struct {
-		CouponID     string `json:"coupon_id"`
-		ReceiveTime  string `json:"receive_time"`
-		UserCouponID string `json:"user_coupon_id"`
+		CouponID     interface{} `json:"coupon_id"`
+		ReceiveTime  string      `json:"receive_time"`
+		UserCouponID interface{} `json:"user_coupon_id"`
 	} `json:"receive_info"`
 }
 
