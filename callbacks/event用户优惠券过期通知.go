@@ -18,7 +18,7 @@ type ChannelsEcUserCouponExpire struct {
 	ToUserName     string `json:"ToUserName"`
 	UserCouponInfo struct {
 		CouponID     interface{} `json:"coupon_id"`
-		ExpireTime   int         `json:"expire_time"`
+		ExpireTime   interface{} `json:"expire_time"`
 		UserCouponID interface{} `json:"user_coupon_id"`
 	} `json:"user_coupon_info"`
 }

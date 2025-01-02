@@ -17,8 +17,8 @@ type ChannelsEcCouponInvalid struct {
 	MsgType      string `json:"MsgType"`
 	ToUserName   string `json:"ToUserName"`
 	CouponInfo   struct {
-		CouponID    string `json:"coupon_id"`
-		InvalidTime string `json:"invalid_time"`
+		CouponID    interface{} `json:"coupon_id"`
+		InvalidTime interface{} `json:"invalid_time"`
 	} `json:"coupon_info"`
 }
 
