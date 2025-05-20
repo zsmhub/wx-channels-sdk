@@ -117,7 +117,9 @@ func (t *token) syncToken() error {
 func Retry(o backoff.Operation) error {
 	ctx, cancelFunc := context.WithTimeout(context.Background(), 1*time.Minute)
 	defer cancelFunc()
-	retryer := backoff.WithContext(backoff.NewExponentialBackOff(), ctx)
+	expBackoff := backoff.NewExponentialBackOff()
+	// 设置最大尝试次数为2次重试(总共3次尝试，1次初始+2次重试)
+	retryer := backoff.WithMaxRetries(backoff.WithContext(expBackoff, ctx), 2)
 	return backoff.Retry(o, retryer)
 }
 
