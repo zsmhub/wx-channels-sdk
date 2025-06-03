@@ -10,16 +10,16 @@ func init() {
 }
 
 type EventProductSpuListing struct {
-	CreateTime      int64  `json:"CreateTime"`
-	Event           string `json:"Event"`
-	FromUserName    string `json:"FromUserName"`
-	MsgType         string `json:"MsgType"`
-	ToUserName      string `json:"ToUserName"`
-	ProductSpuAudit struct {
+	CreateTime        int64  `json:"CreateTime"`
+	Event             string `json:"Event"`
+	FromUserName      string `json:"FromUserName"`
+	MsgType           string `json:"MsgType"`
+	ToUserName        string `json:"ToUserName"`
+	ProductSpuListing struct {
 		ProductID string `json:"product_id"`
 		Status    int64  `json:"status"`
 		Reason    string `json:"reason"`
-	} `json:"ProductSpuAudit"`
+	} `json:"ProductSpuListing"`
 }
 
 func (EventProductSpuListing) GetMessageType() string {
@@ -41,14 +41,14 @@ func (EventProductSpuListing) ParseFromJson(data []byte) (CallbackExtraInfoInter
 		FromUserName: gjson.GetBytes(data, "FromUserName").String(),
 		MsgType:      gjson.GetBytes(data, "MsgType").String(),
 		ToUserName:   gjson.GetBytes(data, "ToUserName").String(),
-		ProductSpuAudit: struct {
+		ProductSpuListing: struct {
 			ProductID string `json:"product_id"`
 			Status    int64  `json:"status"`
 			Reason    string `json:"reason"`
 		}{
-			ProductID: gjson.GetBytes(data, "ProductSpuAudit.product_id").String(),
-			Status:    gjson.GetBytes(data, "ProductSpuAudit.status").Int(),
-			Reason:    gjson.GetBytes(data, "ProductSpuAudit.reason").String(),
+			ProductID: gjson.GetBytes(data, "ProductSpuListing.product_id").String(),
+			Status:    gjson.GetBytes(data, "ProductSpuListing.status").Int(),
+			Reason:    gjson.GetBytes(data, "ProductSpuListing.reason").String(),
 		},
 	}
 	return temp, nil
