@@ -62,6 +62,7 @@ type RespAftersaleGetaftersaleorder struct {
 			ProveImgs      []string `json:"prove_imgs"`
 		} `json:"details"`
 		OrderID string `json:"order_id"`
+		SubType string `json:"sub_type" comment:"售后子类型。DEFAULT:普通售后；REFUND_PRICE_DIFF:退差价售后。"`
 	} `json:"after_sale_order"`
 	CommonResp
 }

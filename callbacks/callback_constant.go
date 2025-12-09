@@ -55,6 +55,9 @@ const EventTypeChannelsEcBrand EventType = "channels_ec_brand"
 // 订单下单
 const EventTypeChannelsEcOrderNew EventType = "channels_ec_order_new"
 
+// 订单待发货
+const EventTypeChannelsEcOrderWait EventType = "channels_ec_order_wait_shipping"
+
 // 订单取消
 const EventTypeChannelsEcOrderCancel EventType = "channels_ec_order_cancel"
 

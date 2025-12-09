@@ -16,9 +16,9 @@ type ProductCategoryAudit struct {
 	FromUserName         string `json:"FromUserName"`
 	MsgType              string `json:"MsgType"`
 	ProductCategoryAudit struct {
-		AuditID string `json:"audit_id"`
-		Reason  string `json:"reason"`
-		Status  string `json:"status"`
+		AuditID interface{} `json:"audit_id"`
+		Reason  string      `json:"reason"`
+		Status  string      `json:"status"`
 	} `json:"ProductCategoryAudit"`
 	ToUserName string `json:"ToUserName"`
 }

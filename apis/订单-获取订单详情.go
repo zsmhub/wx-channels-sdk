@@ -96,7 +96,7 @@ type RespOrderGet struct {
 				ShipDoneTime int `json:"ship_done_time"`
 			} `json:"delivery_info"`
 			CouponInfo struct {
-				UserCouponID string `json:"user_coupon_id"`
+				UserCouponID interface{} `json:"user_coupon_id"`
 			} `json:"coupon_info"`
 			ExtInfo struct {
 				CustomerNotes string `json:"customer_notes"`
