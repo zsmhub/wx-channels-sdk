@@ -2,6 +2,9 @@
 
 > “视频号小店”在2024年9月25日正式更名为“微信小店”，API调用不受影响。
 
+- [微信开发者平台](https://developers.weixin.qq.com/platform)
+- [微信开放平台](https://open.weixin.qq.com/)
+
 - [微信小店-官方接口文档](https://developers.weixin.qq.com/doc/store/shop/API/apimgnt/api_getaccesstoken.html)
 - [视频号小店-官方接口文档](https://developers.weixin.qq.com/doc/channels/API/basics/getaccesstoken.html)
 
