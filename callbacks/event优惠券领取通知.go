@@ -8,7 +8,7 @@ import (
 // 文档: https://developers.weixin.qq.com/doc/channels/API/coupon/ec_callback/channels_ec_coupon_receive.html
 
 func init() {
-	//添加可解析的回调事件
+	// 添加可解析的回调事件
 	supportCallback(ChannelsEcCouponReceive{})
 }
 
@@ -20,7 +20,7 @@ type ChannelsEcCouponReceive struct {
 	ToUserName   string `json:"ToUserName"`
 	ReceiveInfo  struct {
 		CouponID     interface{} `json:"coupon_id"`
-		ReceiveTime  string      `json:"receive_time"`
+		ReceiveTime  int         `json:"receive_time"`
 		UserCouponID interface{} `json:"user_coupon_id"`
 	} `json:"receive_info"`
 }
