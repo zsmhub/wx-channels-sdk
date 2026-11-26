@@ -2,6 +2,7 @@
 
 > “视频号小店”在2024年9月25日正式更名为“微信小店”，API调用不受影响。
 
+- [微信小店后台](https://store.weixin.qq.com/shop)
 - [微信开发者平台](https://developers.weixin.qq.com/platform)
 - [微信开放平台](https://open.weixin.qq.com/)
 
@@ -17,6 +18,15 @@ Go语言实现微信视频号sdk（自建应用维度），集成了视频号小
     + 默认 log.Printf 输出
 
 [点击查看视频号的开发博文](https://zsmhub.github.io/post/%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/%E5%BE%AE%E4%BF%A1%E8%A7%86%E9%A2%91%E5%8F%B7/)
+
+## 商家自研模式接入步骤
+
+[开发者使用指南](https://developers.weixin.qq.com/doc/store/shop/dev_before/guide.html)
+
+1. 获取 AppID、AppSecret：前往「微信小店后台 - 服务市场 - 经营工具 - 自研」，可查看 AppID 和 AppSecret
+2. 获取接口调用凭据：使用 AppID、AppSecret，调用 获取稳定版接口调用凭据 接口获取 access_token，后续所有业务 API 调用均需携带
+3. 调用业务 API：使用 access_token 调用对应业务接口，完整接口列表详见 API 接口
+4. 配置消息推送：接收事件通知（事件通知列表）需配置回调地址，前往「微信小店后台 - 服务市场 - 经营工具 - 自研 - 消息推送」设置，详见 消息通知（回调）说明
 
 ### 安装命令
 
